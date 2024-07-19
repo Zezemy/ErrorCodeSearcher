@@ -1,2 +1,0 @@
-# ErrorCodeSearcher
-Internship Project

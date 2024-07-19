@@ -1,0 +1,224 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ATMErrorCodeSearcher.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\atmerrorcodesearcher\\controllers\\errorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ATMErrorCodeSearcher.csproj|solutionrelative:atmerrorcodesearcher\\controllers\\errorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ErrorDataApi.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\atmerrorcodesearcher\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ErrorDataApi.csproj|solutionrelative:atmerrorcodesearcher\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ErrorDataApi.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\atmerrorcodesearcher\\atmerrordataapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ErrorDataApi.csproj|solutionrelative:atmerrorcodesearcher\\atmerrordataapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ATMErrorCodeSearcher.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\atmerrorcodesearcher\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ATMErrorCodeSearcher.csproj|solutionrelative:atmerrorcodesearcher\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\entities\\dto\\errordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\errordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\entities\\dto\\baserequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\baserequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\entities\\dto\\baseerrordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\baseerrordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ErrorDataApi.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\atmerrorcodesearcher\\errordataapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ErrorDataApi.csproj|solutionrelative:atmerrorcodesearcher\\errordataapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\entities\\dto\\errordatarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\errordatarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\entities\\dto\\searchresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\searchresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ATMErrorCodeSearcher.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\atmerrorcodesearcher\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7B252381-E52A-4E8C-B9CE-2E1A00178929}|ATMErrorCodeSearcher\\ATMErrorCodeSearcher.csproj|solutionrelative:atmerrorcodesearcher\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\atmerrorcodesearcher\\entities\\dto\\errordataresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA4A9178-8870-4E6B-939E-A5291EADC4FB}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\errordataresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ATMErrorDataApi.http",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\ATMErrorDataApi.http",
+              "RelativeDocumentMoniker": "ATMErrorCodeSearcher\\ATMErrorDataApi.http",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\ATMErrorDataApi.http",
+              "RelativeToolTip": "ATMErrorCodeSearcher\\ATMErrorDataApi.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-07-19T08:08:35.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\Context\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "ATMErrorCodeSearcher\\Context\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\Context\\ApplicationDbContext.cs",
+              "RelativeToolTip": "ATMErrorCodeSearcher\\Context\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T08:07:49.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ErrorController.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\Controllers\\ErrorController.cs",
+              "RelativeDocumentMoniker": "ATMErrorCodeSearcher\\Controllers\\ErrorController.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\Controllers\\ErrorController.cs",
+              "RelativeToolTip": "ATMErrorCodeSearcher\\Controllers\\ErrorController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T11:05:19.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BaseErrorData.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\BaseErrorData.cs",
+              "RelativeDocumentMoniker": "Entities\\Dto\\BaseErrorData.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\BaseErrorData.cs",
+              "RelativeToolTip": "Entities\\Dto\\BaseErrorData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T11:31:43.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\appsettings.json",
+              "RelativeDocumentMoniker": "ATMErrorCodeSearcher\\appsettings.json",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\appsettings.json",
+              "RelativeToolTip": "ATMErrorCodeSearcher\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-11T15:04:17.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\Program.cs",
+              "RelativeDocumentMoniker": "ATMErrorCodeSearcher\\Program.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\Program.cs",
+              "RelativeToolTip": "ATMErrorCodeSearcher\\Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-10T09:02:26.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ErrorDataApi.csproj",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\ErrorDataApi.csproj",
+              "RelativeDocumentMoniker": "ATMErrorCodeSearcher\\ErrorDataApi.csproj",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\ErrorDataApi.csproj",
+              "RelativeToolTip": "ATMErrorCodeSearcher\\ErrorDataApi.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-11T08:46:36.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BaseRequest.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\BaseRequest.cs",
+              "RelativeDocumentMoniker": "Entities\\Dto\\BaseRequest.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\BaseRequest.cs",
+              "RelativeToolTip": "Entities\\Dto\\BaseRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T11:03:54.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ErrorData.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\ErrorData.cs",
+              "RelativeDocumentMoniker": "Entities\\Dto\\ErrorData.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\ErrorData.cs",
+              "RelativeToolTip": "Entities\\Dto\\ErrorData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T11:30:32.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ErrorDataRequest.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\ErrorDataRequest.cs",
+              "RelativeDocumentMoniker": "Entities\\Dto\\ErrorDataRequest.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\ErrorDataRequest.cs",
+              "RelativeToolTip": "Entities\\Dto\\ErrorDataRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T11:03:44.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SearchResult.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\SearchResult.cs",
+              "RelativeDocumentMoniker": "Entities\\Dto\\SearchResult.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\SearchResult.cs",
+              "RelativeToolTip": "Entities\\Dto\\SearchResult.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T11:28:56.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ErrorDataResponse.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\ErrorDataResponse.cs",
+              "RelativeDocumentMoniker": "Entities\\Dto\\ErrorDataResponse.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Dto\\ErrorDataResponse.cs",
+              "RelativeToolTip": "Entities\\Dto\\ErrorDataResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T12:05:06.446Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

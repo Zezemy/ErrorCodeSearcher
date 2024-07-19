@@ -1,0 +1,16 @@
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\bin\Debug\ATMErrorCodeSearcherUI.exe.config
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\bin\Debug\ATMErrorCodeSearcherUI.exe
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\bin\Debug\ATMErrorCodeSearcherUI.pdb
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.csproj.AssemblyReference.cache
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.Form1.resources
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.Properties.Resources.resources
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.csproj.GenerateResource.cache
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.csproj.CoreCompileInputs.cache
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.exe
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.pdb
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMError.5772ED44.Up2Date
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\bin\Debug\Newtonsoft.Json.dll
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\bin\Debug\Newtonsoft.Json.xml
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.csproj.SuggestedBindingRedirects.cache
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\ATMErrorCodeSearcherUI\obj\Debug\ATMErrorCodeSearcherUI.exe.config

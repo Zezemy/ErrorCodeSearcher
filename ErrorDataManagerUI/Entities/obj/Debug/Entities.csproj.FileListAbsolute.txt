@@ -1,0 +1,6 @@
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\Entities\bin\Debug\Entities.dll
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\Entities\bin\Debug\Entities.pdb
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\Entities\obj\Debug\Entities.csproj.AssemblyReference.cache
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\Entities\obj\Debug\Entities.dll
+C:\Users\zemya\source\repos\ATMErrorCodeSearcherUI\Entities\obj\Debug\Entities.pdb
