@@ -55,6 +55,8 @@
             this.Tag_tbx = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Reset_btn = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.BulkInsert_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,15 +105,16 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 16);
+            this.label1.Size = new System.Drawing.Size(157, 16);
             this.label1.TabIndex = 6;
-            this.label1.Text = "ATM Error Code Searcher";
+            this.label1.Text = "ATM Error Data Manager";
             // 
             // DeviceClass_cbx
             // 
             this.DeviceClass_cbx.FormattingEnabled = true;
             this.DeviceClass_cbx.Items.AddRange(new object[] {
             "",
+            "XFSGeneral",
             "PTR",
             "IDC",
             "CDM",
@@ -190,8 +193,7 @@
             this.Category_cbx.FormattingEnabled = true;
             this.Category_cbx.Items.AddRange(new object[] {
             "",
-            "Device",
-            "XFSGeneral",
+            "XFS",
             "Simax"});
             this.Category_cbx.Location = new System.Drawing.Point(123, 40);
             this.Category_cbx.Name = "Category_cbx";
@@ -217,11 +219,12 @@
             this.UpdateDate});
             this.ErrorDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ErrorDataGridView.Location = new System.Drawing.Point(9, 334);
+            this.ErrorDataGridView.MultiSelect = false;
             this.ErrorDataGridView.Name = "ErrorDataGridView";
             this.ErrorDataGridView.RowHeadersWidth = 51;
             this.ErrorDataGridView.RowTemplate.Height = 24;
             this.ErrorDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ErrorDataGridView.Size = new System.Drawing.Size(1500, 407);
+            this.ErrorDataGridView.Size = new System.Drawing.Size(1560, 550);
             this.ErrorDataGridView.TabIndex = 13;
             this.ErrorDataGridView.SelectionChanged += new System.EventHandler(this.ErrorDataGridView_SelectionChanged);
             // 
@@ -238,7 +241,7 @@
             this.Code.HeaderText = "Code";
             this.Code.MinimumWidth = 6;
             this.Code.Name = "Code";
-            this.Code.Width = 100;
+            this.Code.Width = 125;
             // 
             // Description
             // 
@@ -252,7 +255,7 @@
             this.Category.HeaderText = "Category";
             this.Category.MinimumWidth = 6;
             this.Category.Name = "Category";
-            this.Category.Width = 100;
+            this.Category.Width = 125;
             // 
             // DeviceClassName
             // 
@@ -266,7 +269,7 @@
             this.Tag.HeaderText = "Tag";
             this.Tag.MinimumWidth = 6;
             this.Tag.Name = "Tag";
-            this.Tag.Width = 100;
+            this.Tag.Width = 125;
             // 
             // CreatedBy
             // 
@@ -314,7 +317,7 @@
             // 
             // Reset_btn
             // 
-            this.Reset_btn.Location = new System.Drawing.Point(857, 277);
+            this.Reset_btn.Location = new System.Drawing.Point(732, 277);
             this.Reset_btn.Name = "Reset_btn";
             this.Reset_btn.Size = new System.Drawing.Size(91, 31);
             this.Reset_btn.TabIndex = 16;
@@ -322,11 +325,26 @@
             this.Reset_btn.UseVisualStyleBackColor = true;
             this.Reset_btn.Click += new System.EventHandler(this.Reset_btn_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // BulkInsert_btn
+            // 
+            this.BulkInsert_btn.Location = new System.Drawing.Point(732, 203);
+            this.BulkInsert_btn.Name = "BulkInsert_btn";
+            this.BulkInsert_btn.Size = new System.Drawing.Size(108, 31);
+            this.BulkInsert_btn.TabIndex = 17;
+            this.BulkInsert_btn.Text = "Bulk Insert";
+            this.BulkInsert_btn.UseVisualStyleBackColor = true;
+            this.BulkInsert_btn.Click += new System.EventHandler(this.BulkInsert_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1482, 753);
+            this.ClientSize = new System.Drawing.Size(1593, 753);
+            this.Controls.Add(this.BulkInsert_btn);
             this.Controls.Add(this.Reset_btn);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Tag_tbx);
@@ -382,6 +400,8 @@
         private System.Windows.Forms.TextBox Tag_tbx;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button Reset_btn;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button BulkInsert_btn;
     }
 }
 
