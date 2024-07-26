@@ -6,6 +6,6 @@ namespace Entities.Dto
 {
     public class ErrorDataRequest: BaseRequest
     {
-        public ErrorData ErrorData { get; set; }
+        public ErrorData[] ErrorDataArray { get; set; }
     }
 }

@@ -241,6 +241,7 @@ namespace ErrorDataManagerUI
         private void Reset_btn_Click(object sender, EventArgs e)
         {
             ResetForm();
+            ErrorDataGridView.DataSource = null;
         }
         private void ResetForm()
         {
@@ -322,77 +323,86 @@ namespace ErrorDataManagerUI
 
         private async void BulkInsert_btn_Click(object sender, EventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            try
             {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+
+                var fileContent = string.Empty;
+                var filePath = string.Empty;
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
+                    openFileDialog.InitialDirectory = "c:\\";
+                    openFileDialog.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
 
-                    //Read the contents of the file into a stream
-                    var fileStream = openFileDialog.OpenFile();
-
-                    using (StreamReader reader = new StreamReader(fileStream))
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        fileContent = reader.ReadToEnd();
+                        //Get the path of specified file
+                        filePath = openFileDialog.FileName;
+
+                        //Read the contents of the file into a stream
+                        var fileStream = openFileDialog.OpenFile();
+
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            fileContent = reader.ReadToEnd();
+                        }
                     }
                 }
-            }
-            var lines = fileContent.Split(Environment.NewLine.ToCharArray());
-            StringBuilder sb = new StringBuilder();
-            Dictionary<string, ErrorDataResponse> insertResults = new Dictionary<string, ErrorDataResponse>();
-            Dictionary<string, ErrorData> insertErrorDataArray = new Dictionary<string, ErrorData>();
-            foreach (var line in lines)
-            {
-                if (line.Length == 0) continue;
-                var category = string.Empty;
-                var deviceClassName = string.Empty;
-                var tokens = line.Split(new string[] { "#;#" }, StringSplitOptions.None);
-                var errorCode = tokens[0];
-                var description = tokens[1];
-                var tag = tokens.Length > 2 ? tokens[2] : string.Empty;
-                SetCategory(ref category, ref deviceClassName, errorCode);
-                var errorData = new ErrorData();
-                errorData.Description = description.Trim();
-                errorData.Category = category.Trim();
-                errorData.DeviceClassName = deviceClassName.Trim();
-                errorData.Code = errorCode.Trim();
-                errorData.Tag = tag.Trim();
-                errorData.CreateDate = DateTime.Now;
-                errorData.CreatedBy = "";
-                var resultDataKey = errorData.Category.Trim() + errorData.DeviceClassName.Trim() + errorData.Code.Trim();
-                if (!insertErrorDataArray.ContainsKey(resultDataKey))
+                var lines = fileContent.Split(Environment.NewLine.ToCharArray());
+                StringBuilder sb = new StringBuilder();
+                Dictionary<string, ErrorDataResponse> insertResults = new Dictionary<string, ErrorDataResponse>();
+                Dictionary<string, ErrorData> insertErrorDataArray = new Dictionary<string, ErrorData>();
+                foreach (var line in lines)
                 {
-                    insertErrorDataArray.Add(resultDataKey, errorData);
-                    //if (response != null)
-                    //{
-                    //    insertResults[resultDataKey] = response;
-                    //}
-                    //else
-                    //{
-                    //    insertResults[resultDataKey] = new ErrorDataResponse()
-                    //    {
-                    //        ResponseCode = "3",
-                    //        ResponseDescription = "Response null."
-                    //    };
-                    //}
+                    if (line.Length == 0) continue;
+                    var category = string.Empty;
+                    var deviceClassName = string.Empty;
+                    var tokens = line.Split(new string[] { "#;#" }, StringSplitOptions.None);
+                    var errorCode = tokens[0];
+                    var description = tokens[1];
+                    var tag = tokens.Length > 2 ? tokens[2] : string.Empty;
+                    SetCategory(ref category, ref deviceClassName, errorCode);
+                    var errorData = new ErrorData();
+                    errorData.Description = description.Trim();
+                    errorData.Category = category.Trim();
+                    errorData.DeviceClassName = deviceClassName.Trim();
+                    errorData.Code = errorCode.Trim();
+                    errorData.Tag = tag.Trim();
+                    errorData.CreateDate = DateTime.Now;
+                    errorData.CreatedBy = "";
+                    var resultDataKey = errorData.Category.Trim() + errorData.DeviceClassName.Trim() + errorData.Code.Trim();
+                    if (!insertErrorDataArray.ContainsKey(resultDataKey))
+                    {
+                        insertErrorDataArray.Add(resultDataKey, errorData);
+                        //if (response != null)
+                        //{
+                        //    insertResults[resultDataKey] = response;
+                        //}
+                        //else
+                        //{
+                        //    insertResults[resultDataKey] = new ErrorDataResponse()
+                        //    {
+                        //        ResponseCode = "3",
+                        //        ResponseDescription = "Response null."
+                        //    };
+                        //}
+                    }
                 }
+                var response = await AddErrorData(insertErrorDataArray.Values.ToArray());
+                MessageBox.Show(response.ResponseDescription);
             }
-            var response = await AddErrorData(insertErrorDataArray.Values.ToArray());
-            MessageBox.Show(response.ResponseDescription);
             //foreach (var item in insertResults)
             //{
             //    sb.AppendLine(Newtonsoft.Json.JsonConvert.SerializeObject(item));
             //}
-            //File.WriteAllText(filePath + ".BulkInsertLog", sb.ToString());
+            //File.WriteAllText(filePath + ".BulkInsertLog", sb.ToString());            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private static void SetCategory(ref string category, ref string deviceClassName, string errorCode)

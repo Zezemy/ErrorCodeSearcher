@@ -1,22 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\",
+  "WorkspaceRootPath": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|c:\\users\\zemya\\source\\repos\\errordatamanagerui\\errordatamanagerui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|c:\\users\\zemya\\source\\repos\\errorcodesearcher\\errordatamanagerui\\errordatamanagerui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|solutionrelative:errordatamanagerui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\errordatamanagerui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{4E6DB9AE-D6CF-43D9-A315-6E14AA1E09F3}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\errorcodesearcher\\errordatamanagerui\\entities\\dto\\errordataresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E6DB9AE-D6CF-43D9-A315-6E14AA1E09F3}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\errordataresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E6DB9AE-D6CF-43D9-A315-6E14AA1E09F3}|Entities\\Entities.csproj|C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\entities\\dto\\errordatarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E6DB9AE-D6CF-43D9-A315-6E14AA1E09F3}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\errordatarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\errordatamanagerui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|solutionrelative:errordatamanagerui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|c:\\users\\zemya\\source\\repos\\errordatamanagerui\\errordatamanagerui\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\errordatamanagerui\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{357B4447-7560-4BBE-987A-783566F16F76}|ErrorDataManagerUI\\ErrorDataManagerUI.csproj|solutionrelative:errordatamanagerui\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4E6DB9AE-D6CF-43D9-A315-6E14AA1E09F3}|Entities\\Entities.csproj|c:\\users\\zemya\\source\\repos\\errordatamanagerui\\entities\\dto\\errordatarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E6DB9AE-D6CF-43D9-A315-6E14AA1E09F3}|Entities\\Entities.csproj|solutionrelative:entities\\dto\\errordatarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,15 +30,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "ErrorDataResponse.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\Entities\\Dto\\ErrorDataResponse.cs",
+              "RelativeDocumentMoniker": "Entities\\Dto\\ErrorDataResponse.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\Entities\\Dto\\ErrorDataResponse.cs",
+              "RelativeToolTip": "Entities\\Dto\\ErrorDataResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-26T08:43:44.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ErrorDataRequest.cs",
-              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\Entities\\Dto\\ErrorDataRequest.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\Entities\\Dto\\ErrorDataRequest.cs",
               "RelativeDocumentMoniker": "Entities\\Dto\\ErrorDataRequest.cs",
-              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\Entities\\Dto\\ErrorDataRequest.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\Entities\\Dto\\ErrorDataRequest.cs",
               "RelativeToolTip": "Entities\\Dto\\ErrorDataRequest.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAoAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -43,41 +60,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "ErrorDataManagerUI\\Form1.Designer.cs",
-              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.Designer.cs",
               "RelativeToolTip": "ErrorDataManagerUI\\Form1.Designer.cs",
               "ViewState": "AQIAAGcAAAAAAAAAAAAtwHsAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T08:29:51.193Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T08:29:51.193Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs",
               "RelativeDocumentMoniker": "ErrorDataManagerUI\\Form1.cs",
-              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs",
+              "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs",
               "RelativeToolTip": "ErrorDataManagerUI\\Form1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAH0AAAANAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAawGQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-19T08:15:00.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs",
               "RelativeDocumentMoniker": "ErrorDataManagerUI\\Form1.cs",
               "ToolTip": "C:\\Users\\zemya\\source\\repos\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs [Design]",
-              "RelativeToolTip": "ErrorDataManagerUI\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\..\\ErrorDataManagerUI\\ErrorDataManagerUI\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T08:14:55.42Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-07-19T08:14:55.42Z"
             }
           ]
         }

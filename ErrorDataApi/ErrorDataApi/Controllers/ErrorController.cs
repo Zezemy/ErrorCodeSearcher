@@ -2,6 +2,7 @@
 using Entities.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using static Entities.Dto.Enums;
 
 namespace ErrorDataApi.Controllers
 {
@@ -49,71 +50,169 @@ namespace ErrorDataApi.Controllers
 
                 throw ex;
             }
-            
+
 
         }
 
         [HttpPost(Name = "SearchErrors")]
         public async Task<SearchResult> SearchAsync([FromBody] SearchErrorRequest req)
         {
-            if (req.ErrorDataList == null || !req.ErrorDataList.Any() || (req.ErrorDataList.Count == 1 && AreFieldsEmpty(req.ErrorDataList[0])) )
+            IQueryable<ErrorData> result = _context.ErrorDatas;
+            if (req.ErrorDataList == null || !req.ErrorDataList.Any() || (req.ErrorDataList.Count == 1 && AreFieldsEmpty(req.ErrorDataList[0])))
             {
-                return new SearchResult()
-                {
-                    Data = _context.ErrorDatas.ToList()
-                };
-            }
-            else
-            {
-                var errorCodeList = req.ErrorDataList.Select(x => x.Code);
-                var errorDescriptionList = req.ErrorDataList.Select(x => x.Description);
-                var errorDeviceClassNameList = req.ErrorDataList.Select(x => x.DeviceClassName);
-                var errorTagList = req.ErrorDataList.Select(x => x.Tag);
-                var resultData1 = _context.ErrorDatas.Where(x => errorCodeList.Contains(x.Code));
-                var resultData2 = _context.ErrorDatas.Where(x => errorDescriptionList.Contains(x.Description));
-                var resultData3 = _context.ErrorDatas.Where(x => errorDeviceClassNameList.Contains(x.DeviceClassName));
-                var resultData4 = _context.ErrorDatas.Where(x => errorTagList.Contains(x.Tag));
-                var result = resultData1.Union(resultData2).Union(resultData3).Union(resultData4);
                 return new SearchResult()
                 {
                     Data = result.ToList()
                 };
             }
+            else
+            {
 
+                if (req.ErrorDataList.Count == 1)
+                {
+                    result = FilterByErrorData(req);
+                    return ReturnSearhResult(result);
+                }
+
+                result = FilterByCodeList(req, result);
+                result = FilterByDescriptionList(req, result);
+                result = FilterByCategoryList(req, result);
+                result = FilterByDeviceClassNameList(req, result);
+                result = FilterByTagList(req, result);
+
+                return ReturnSearhResult(result);
+
+            }
+
+        }
+
+        private IQueryable<ErrorData> FilterByCodeList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
+        {
+            var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.Code)).Select(x => x.Code);
+            return errorDatas.Where(x => list.Contains(x.Code));
+
+        }
+        private IQueryable<ErrorData> FilterByDescriptionList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
+        {
+            var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.Description)).Select(x => x.Description);
+            return errorDatas.Where(x => list.Contains(x.Description));
+
+        }
+
+        private IQueryable<ErrorData> FilterByCategoryList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
+        {
+            var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.Category)).Select(x => x.Category);
+            return errorDatas.Where(x => list.Contains(x.Category));
+        }
+        private IQueryable<ErrorData> FilterByDeviceClassNameList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
+        {
+            var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.DeviceClassName)).Select(x => x.DeviceClassName);
+            return errorDatas.Where(x => list.Contains(x.DeviceClassName));
+
+        }
+
+        private IQueryable<ErrorData> FilterByTagList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
+        {
+            var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.Tag)).Select(x => x.Tag);
+            return errorDatas.Where(x => list.Contains(x.Tag));
+
+        }
+
+        private IQueryable<ErrorData> FilterByErrorData(SearchErrorRequest req)
+        {
+            IQueryable<ErrorData> result = _context.ErrorDatas;
+            var code = req.ErrorDataList[0].Code;
+            var description = req.ErrorDataList[0].Description;
+            var category = req.ErrorDataList[0].Category;
+            var deviceClassName = req.ErrorDataList[0].DeviceClassName;
+            var tag = req.ErrorDataList[0].Tag;
+            if (!string.IsNullOrEmpty(code))
+            {
+                return _context.ErrorDatas.Where(x => x.Code == code);
+            }
+
+            if (!string.IsNullOrEmpty(description))
+            {
+                return _context.ErrorDatas.Where(x => x.Description == description);
+            }
+            if (!string.IsNullOrEmpty(category))
+            {
+                return _context.ErrorDatas.Where(x => x.Category == category);
+            }
+
+            if (!string.IsNullOrEmpty(deviceClassName))
+            {
+                return _context.ErrorDatas.Where(x => x.DeviceClassName == deviceClassName);
+            }
+
+            if (!string.IsNullOrEmpty(tag))
+            {
+                return _context.ErrorDatas.Where(x => x.Tag == tag);
+            }
+
+            return result;
+        }
+
+        private static SearchResult ReturnSearhResult(IQueryable<ErrorData> result)
+        {
+            return new SearchResult()
+            {
+                Data = result.ToList()
+            };
         }
 
         [HttpPost(Name = "AddAsync")]
         public async Task<ErrorDataResponse> AddAsync([FromBody] ErrorDataRequest req)
         {
-            //errorDatas.Add(req.ErrorData);
-            _context.ErrorDatas.Add(req.ErrorData);
+            if (req.ErrorDataArray.Any(x => AnyFieldsEmpty(x)))
+            {
+                return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+            }
+            _context.ErrorDatas.AddRange(req.ErrorDataArray);
             _context.SaveChanges();
+            return ReturnResponseMessage("0", "İşlem başarılı.");
+        }
+
+        private static ErrorDataResponse ReturnResponseMessage(string code, string description)
+        {
             return new ErrorDataResponse()
             {
-                ResponseCode = "0",
-                ResponseDescription = "İşlem başarılı."
+                ResponseCode = code,
+                ResponseDescription = description
             };
         }
+
 
         [HttpPut(Name = "UpdateAsync")]
         public async Task<ErrorDataResponse> UpdateAsync([FromBody] ErrorDataRequest req)
         {
-            var errorData = _context.ErrorDatas.Where(x => x.Id == req.ErrorData.Id).FirstOrDefault();
-            if (errorData == null)
+            foreach (var errorDataFromRequest in req.ErrorDataArray)
             {
-                return new ErrorDataResponse()
+                var errorData = _context.ErrorDatas.Where(x => x.Id == errorDataFromRequest.Id).FirstOrDefault();
+                if (errorData == null)
                 {
-                    ResponseCode = "1",
-                    ResponseDescription = $"{req.ErrorData.Code} kodlu hata tanımı bulunamadı."
-                };
+                    return ReturnResponseMessage("2", $"{errorData.Code} kodlu hata tanımı bulunamadı.");
+                }
+                if (AnyFieldsEmpty(errorData))
+                {
+                    return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                }
+                var supportedDevices = Enum.GetNames<DeviceClasses>().ToList();
+                supportedDevices.Add("XFSGeneral");
+                if (supportedDevices.Contains(errorDataFromRequest.DeviceClassName))
+                {
+                    errorData.Description = errorDataFromRequest.Description;
+                    errorData.Code = errorDataFromRequest.Code;
+                    errorData.Category = errorDataFromRequest.Category;
+                    errorData.DeviceClassName = errorDataFromRequest.DeviceClassName;
+                    errorData.Tag = errorDataFromRequest.Tag;
+                }
+                else
+                    return ReturnResponseMessage("3", "İşlem başarısız. Desteklenmeyen cihaz tipi.");
             }
-            errorData.Description = req.ErrorData.Description;
+
             _context.SaveChanges();
-            return new ErrorDataResponse()
-            {
-                ResponseCode = "0",
-                ResponseDescription = "İşlem başarılı."
-            };
+            return ReturnResponseMessage("0", "İşlem başarılı.");
         }
 
         [HttpDelete(Name = "DeleteAsync")]
@@ -130,11 +229,7 @@ namespace ErrorDataApi.Controllers
             }
             _context.ErrorDatas.Remove(errorData);
             _context.SaveChanges();
-            return new ErrorDataResponse()
-            {
-                ResponseCode = "0",
-                ResponseDescription = "İşlem başarılı."
-            };
+            return ReturnResponseMessage("0", "İşlem başarılı.");
         }
         private bool AreFieldsEmpty(ErrorData data)
         {
@@ -144,6 +239,15 @@ namespace ErrorDataApi.Controllers
             var isCategoryEmpty = string.IsNullOrWhiteSpace(data.Category);
             var isTagEmpty = string.IsNullOrWhiteSpace(data.Tag);
             return isDeviceClassNameEmpty && isErrorCodeEmpty && isDescriptionEmpty && isCategoryEmpty && isTagEmpty;
+        }
+
+        private bool AnyFieldsEmpty(ErrorData data)
+        {
+            var isDeviceClassNameEmpty = string.IsNullOrWhiteSpace(data.DeviceClassName);
+            var isErrorCodeEmpty = string.IsNullOrWhiteSpace(data.Code);
+            var isDescriptionEmpty = string.IsNullOrWhiteSpace(data.Description);
+            var isCategoryEmpty = string.IsNullOrWhiteSpace(data.Category);
+            return isDeviceClassNameEmpty || isErrorCodeEmpty || isDescriptionEmpty || isCategoryEmpty;
         }
     }
 }

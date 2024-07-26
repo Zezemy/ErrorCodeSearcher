@@ -4694,11 +4694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\ErrorDataApi.csproj",
+      "projectUniqueName": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\ErrorDataApi\\ErrorDataApi.csproj",
       "projectName": "ErrorDataApi",
-      "projectPath": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\ErrorDataApi.csproj",
+      "projectPath": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\ErrorDataApi\\ErrorDataApi.csproj",
       "packagesPath": "C:\\Users\\zemya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\obj\\",
+      "outputPath": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\ErrorDataApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4720,8 +4720,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Entities.csproj"
+            "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\Entities\\Entities.csproj"
             }
           }
         }

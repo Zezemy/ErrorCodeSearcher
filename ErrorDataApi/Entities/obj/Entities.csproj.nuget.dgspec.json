@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Entities.csproj": {}
+    "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\Entities\\Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Entities.csproj": {
+    "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\Entities.csproj",
+        "projectPath": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\zemya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\Entities\\obj\\",
+        "outputPath": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

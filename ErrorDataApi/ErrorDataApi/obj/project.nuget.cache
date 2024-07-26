@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QiU3QCSonq0xGNCD1IIi/7BOyq8hspFgO3Gme1lPIZBOhSWJQ1BKumC+Ba83DLWCuTGrglUC4PYuZUCXUoXbiA==",
+  "dgSpecHash": "4rCrdPP6ACAcBWo51xw+ZbOxMFdOfA9fEdrKZkmlkmv5Gh+Kyy6aaW5vDuKFewO6cXmtjNAuvExzWEwO9TSSRg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\zemya\\source\\repos\\ATMErrorCodeSearcher\\ATMErrorCodeSearcher\\ErrorDataApi.csproj",
+  "projectFilePath": "C:\\Users\\zemya\\source\\repos\\ErrorCodeSearcher\\ErrorDataApi\\ErrorDataApi\\ErrorDataApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zemya\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\zemya\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
