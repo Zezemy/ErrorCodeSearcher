@@ -50,8 +50,6 @@ namespace ErrorDataApi.Controllers
 
                 throw ex;
             }
-
-
         }
 
         [HttpPost(Name = "SearchErrors")]
@@ -81,9 +79,7 @@ namespace ErrorDataApi.Controllers
                 result = FilterByTagList(req, result);
 
                 return ReturnSearhResult(result);
-
             }
-
         }
 
         private IQueryable<ErrorData> FilterByCodeList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
@@ -182,7 +178,6 @@ namespace ErrorDataApi.Controllers
             };
         }
 
-
         [HttpPut(Name = "UpdateAsync")]
         public async Task<ErrorDataResponse> UpdateAsync([FromBody] ErrorDataRequest req)
         {
@@ -191,7 +186,7 @@ namespace ErrorDataApi.Controllers
                 var errorData = _context.ErrorDatas.Where(x => x.Id == errorDataFromRequest.Id).FirstOrDefault();
                 if (errorData == null)
                 {
-                    return ReturnResponseMessage("2", $"{errorData.Code} kodlu hata tanımı bulunamadı.");
+                    return ReturnResponseMessage("2", $"{errorData?.Code} kodlu hata tanımı bulunamadı.");
                 }
                 if (AnyFieldsEmpty(errorData))
                 {
@@ -231,6 +226,7 @@ namespace ErrorDataApi.Controllers
             _context.SaveChanges();
             return ReturnResponseMessage("0", "İşlem başarılı.");
         }
+
         private bool AreFieldsEmpty(ErrorData data)
         {
             var isDeviceClassNameEmpty = string.IsNullOrWhiteSpace(data.DeviceClassName);

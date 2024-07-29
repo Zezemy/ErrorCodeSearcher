@@ -61,9 +61,16 @@ namespace ErrorDataManagerUI
                 };
                 var responseStr = await CallApiPostMethodAsync(client, obj, "search");
                 var searchResult = Newtonsoft.Json.JsonConvert.DeserializeObject<SearchResult>(responseStr);
+                ErrorDataGridView.SelectionChanged -= new System.EventHandler(this.ErrorDataGridView_SelectionChanged);
+                ErrorDataGridView.DataSource = null;
                 ErrorDataGridView.DataSource = searchResult.Data;
                 ErrorDataGridView.ClearSelection();
-                ResetForm();
+                ErrorDataGridView.SelectionChanged += new System.EventHandler(this.ErrorDataGridView_SelectionChanged);
+                var messageBoxResult = MessageBox.Show("Form temizlensin mi?", "" , MessageBoxButtons.YesNo);
+                if (messageBoxResult == DialogResult.OK)
+                {
+                    ResetForm();
+                }
             }
             catch (Exception ex)
             {
