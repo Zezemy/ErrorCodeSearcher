@@ -17,6 +17,7 @@ namespace ErrorDataManagerUI
 {
     public partial class Form1 : Form
     {
+        List<ErrorData> errors;
         public Form1()
         {
             InitializeComponent();
@@ -63,13 +64,17 @@ namespace ErrorDataManagerUI
                 var searchResult = Newtonsoft.Json.JsonConvert.DeserializeObject<SearchResult>(responseStr);
                 ErrorDataGridView.SelectionChanged -= new System.EventHandler(this.ErrorDataGridView_SelectionChanged);
                 ErrorDataGridView.DataSource = null;
-                ErrorDataGridView.DataSource = searchResult.Data;
+                errors = searchResult.Data;
+                ErrorDataGridView.DataSource = errors;
                 ErrorDataGridView.ClearSelection();
                 ErrorDataGridView.SelectionChanged += new System.EventHandler(this.ErrorDataGridView_SelectionChanged);
-                var messageBoxResult = MessageBox.Show("Form temizlensin mi?", "" , MessageBoxButtons.YesNo);
-                if (messageBoxResult == DialogResult.OK)
+                if (!AnyFormFieldsIsEmpty())
                 {
-                    ResetForm();
+                    var messageBoxResult = MessageBox.Show("Form temizlensin mi?", "", MessageBoxButtons.YesNo);
+                    if (messageBoxResult == DialogResult.Yes)
+                    {
+                        ResetForm();
+                    }
                 }
             }
             catch (Exception ex)
@@ -181,7 +186,6 @@ namespace ErrorDataManagerUI
                 if (ErrorDataGridView.SelectedRows.Count != 0)
                 {
                     var selected = (ErrorDataGridView.SelectedRows[0].DataBoundItem as ErrorData);
-                    var selectedId = selected.Id;
 
                     var anyFormFieldsEmpty = AnyFormFieldsIsEmpty();
                     if (anyFormFieldsEmpty)
@@ -190,29 +194,41 @@ namespace ErrorDataManagerUI
                     }
                     else
                     {
-                        HttpClient client = new HttpClient();
-                        var formUniqueKey = Category_cbx.Text.Trim() + DeviceClass_cbx.Text.Trim() + ErrorCode_tbx.Text.Trim();
-                        var selectedRowUniqueKey = selected.Category.Trim() + selected.DeviceClassName.Trim() + selected.Code.Trim();
-                        if (selectedRowUniqueKey == formUniqueKey)
-                        {
-                            var responseStr = await CallApiDeleteMethodAsync(client, selectedId, "delete");
-                            var response = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorDataResponse>(responseStr);
-                            var dialogResult = MessageBox.Show(response.ResponseDescription);
-                            if (dialogResult == DialogResult.OK)
-                            {
-                                ResetForm();
-                            }
-                        }
-                        else
-                        {
-                            var errorMessageDialogResult = MessageBox.Show("Lütfen bir seçim yapınız.");
-                        }
+                        await DeleteProcess(selected);
                     }
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        private async Task DeleteProcess(ErrorData selected)
+        {
+            var ensuringDialogResult = MessageBox.Show($"{selected.Code} kodlu, {Environment.NewLine}" +
+                $" {selected.Category} kategorili, {Environment.NewLine}" +
+                $" {selected.DeviceClassName} cihaz sınıfına ait {Environment.NewLine}" +
+                $" kaydı silmek istiyor musunuz?", "", MessageBoxButtons.YesNo);
+            if (ensuringDialogResult == DialogResult.Yes)
+            {
+                HttpClient client = new HttpClient();
+                var formUniqueKey = Category_cbx.Text.Trim() + DeviceClass_cbx.Text.Trim() + ErrorCode_tbx.Text.Trim();
+                var selectedRowUniqueKey = selected.Category.Trim() + selected.DeviceClassName.Trim() + selected.Code.Trim();
+                if (selectedRowUniqueKey == formUniqueKey)
+                {
+                    var responseStr = await CallApiDeleteMethodAsync(client, selected.Id, "delete");
+                    var response = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorDataResponse>(responseStr);
+                    var dialogResult = MessageBox.Show(response.ResponseDescription);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        ResetForm();
+                    }
+                }
+                else
+                {
+                    var errorMessageDialogResult = MessageBox.Show("Lütfen bir seçim yapınız.");
+                }
             }
         }
 
@@ -493,6 +509,22 @@ namespace ErrorDataManagerUI
             else if (errorCodeintValue <= -1700 && errorCodeintValue > -1800)
             {
                 deviceClassName = "BIO";
+            }
+        }
+
+        private async void ErrorDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ErrorDataGridView[e.ColumnIndex, e.RowIndex] is DataGridViewButtonCell cell)
+            {
+                var cellData = cell as DataGridViewButtonCell;
+                if (cellData.OwningColumn.Name == "DataGridViewDeleteButton")
+                {
+                    var selected = (ErrorDataGridView.SelectedRows[e.RowIndex].DataBoundItem as ErrorData);
+                    await DeleteProcess(selected);
+                    errors.RemoveAt(e.RowIndex);
+                    ErrorDataGridView.DataSource = errors;
+                    ErrorDataGridView.Refresh();
+                }
             }
         }
     }

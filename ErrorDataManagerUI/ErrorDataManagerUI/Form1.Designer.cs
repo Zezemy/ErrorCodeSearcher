@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Search_btn = new System.Windows.Forms.Button();
             this.Add_btn = new System.Windows.Forms.Button();
             this.Update_btn = new System.Windows.Forms.Button();
@@ -42,6 +43,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.Category_cbx = new System.Windows.Forms.ComboBox();
             this.ErrorDataGridView = new System.Windows.Forms.DataGridView();
+            this.Tag_tbx = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Reset_btn = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.BulkInsert_btn = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,11 +58,7 @@
             this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tag_tbx = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Reset_btn = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.BulkInsert_btn = new System.Windows.Forms.Button();
+            this.DataGridViewDeleteButton = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -216,7 +218,8 @@
             this.CreatedBy,
             this.CreateDate,
             this.UpdatedBy,
-            this.UpdateDate});
+            this.UpdateDate,
+            this.DataGridViewDeleteButton});
             this.ErrorDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ErrorDataGridView.Location = new System.Drawing.Point(9, 334);
             this.ErrorDataGridView.MultiSelect = false;
@@ -226,78 +229,8 @@
             this.ErrorDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ErrorDataGridView.Size = new System.Drawing.Size(1560, 550);
             this.ErrorDataGridView.TabIndex = 13;
+            this.ErrorDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ErrorDataGridView_CellContentClick);
             this.ErrorDataGridView.SelectionChanged += new System.EventHandler(this.ErrorDataGridView_SelectionChanged);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.MinimumWidth = 6;
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
-            this.Id.Width = 125;
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "Code";
-            this.Code.MinimumWidth = 6;
-            this.Code.Name = "Code";
-            this.Code.Width = 125;
-            // 
-            // Description
-            // 
-            this.Description.HeaderText = "Description";
-            this.Description.MinimumWidth = 6;
-            this.Description.Name = "Description";
-            this.Description.Width = 125;
-            // 
-            // Category
-            // 
-            this.Category.HeaderText = "Category";
-            this.Category.MinimumWidth = 6;
-            this.Category.Name = "Category";
-            this.Category.Width = 125;
-            // 
-            // DeviceClassName
-            // 
-            this.DeviceClassName.HeaderText = "DeviceClass";
-            this.DeviceClassName.MinimumWidth = 6;
-            this.DeviceClassName.Name = "DeviceClassName";
-            this.DeviceClassName.Width = 125;
-            // 
-            // Tag
-            // 
-            this.Tag.HeaderText = "Tag";
-            this.Tag.MinimumWidth = 6;
-            this.Tag.Name = "Tag";
-            this.Tag.Width = 125;
-            // 
-            // CreatedBy
-            // 
-            this.CreatedBy.HeaderText = "CreatedBy";
-            this.CreatedBy.MinimumWidth = 6;
-            this.CreatedBy.Name = "CreatedBy";
-            this.CreatedBy.Width = 125;
-            // 
-            // CreateDate
-            // 
-            this.CreateDate.HeaderText = "CreateDate";
-            this.CreateDate.MinimumWidth = 6;
-            this.CreateDate.Name = "CreateDate";
-            this.CreateDate.Width = 125;
-            // 
-            // UpdatedBy
-            // 
-            this.UpdatedBy.HeaderText = "UpdatedBy";
-            this.UpdatedBy.MinimumWidth = 6;
-            this.UpdatedBy.Name = "UpdatedBy";
-            this.UpdatedBy.Width = 125;
-            // 
-            // UpdateDate
-            // 
-            this.UpdateDate.HeaderText = "UpdateDate";
-            this.UpdateDate.MinimumWidth = 6;
-            this.UpdateDate.Name = "UpdateDate";
-            this.UpdateDate.Width = 125;
             // 
             // Tag_tbx
             // 
@@ -338,6 +271,91 @@
             this.BulkInsert_btn.Text = "Bulk Insert";
             this.BulkInsert_btn.UseVisualStyleBackColor = true;
             this.BulkInsert_btn.Click += new System.EventHandler(this.BulkInsert_btn_Click);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.MinimumWidth = 6;
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            this.Id.Width = 110;
+            // 
+            // Code
+            // 
+            this.Code.HeaderText = "Code";
+            this.Code.MinimumWidth = 6;
+            this.Code.Name = "Code";
+            this.Code.Width = 125;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.MinimumWidth = 6;
+            this.Description.Name = "Description";
+            this.Description.Width = 125;
+            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.MinimumWidth = 6;
+            this.Category.Name = "Category";
+            this.Category.Width = 90;
+            // 
+            // DeviceClassName
+            // 
+            this.DeviceClassName.HeaderText = "DeviceClass";
+            this.DeviceClassName.MinimumWidth = 6;
+            this.DeviceClassName.Name = "DeviceClassName";
+            this.DeviceClassName.Width = 90;
+            // 
+            // Tag
+            // 
+            this.Tag.HeaderText = "Tag";
+            this.Tag.MinimumWidth = 6;
+            this.Tag.Name = "Tag";
+            this.Tag.Width = 90;
+            // 
+            // CreatedBy
+            // 
+            this.CreatedBy.HeaderText = "CreatedBy";
+            this.CreatedBy.MinimumWidth = 6;
+            this.CreatedBy.Name = "CreatedBy";
+            this.CreatedBy.Width = 110;
+            // 
+            // CreateDate
+            // 
+            this.CreateDate.HeaderText = "CreateDate";
+            this.CreateDate.MinimumWidth = 6;
+            this.CreateDate.Name = "CreateDate";
+            this.CreateDate.Width = 125;
+            // 
+            // UpdatedBy
+            // 
+            this.UpdatedBy.HeaderText = "UpdatedBy";
+            this.UpdatedBy.MinimumWidth = 6;
+            this.UpdatedBy.Name = "UpdatedBy";
+            this.UpdatedBy.Width = 110;
+            // 
+            // UpdateDate
+            // 
+            this.UpdateDate.HeaderText = "UpdateDate";
+            this.UpdateDate.MinimumWidth = 6;
+            this.UpdateDate.Name = "UpdateDate";
+            this.UpdateDate.Width = 125;
+            // 
+            // DataGridViewDeleteButton
+            // 
+            this.DataGridViewDeleteButton.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridViewDeleteButton.HeaderText = "";
+            this.DataGridViewDeleteButton.MinimumWidth = 6;
+            this.DataGridViewDeleteButton.Name = "DataGridViewDeleteButton";
+            this.DataGridViewDeleteButton.Text = "Delete";
+            this.DataGridViewDeleteButton.Width = 110;
+            this.DataGridViewDeleteButton.DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle()
+            {
+                Padding = new System.Windows.Forms.Padding(4, 2, 4, 2),
+                NullValue = "Delete"
+            };
             // 
             // Form1
             // 
@@ -387,6 +405,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox Category_cbx;
         private System.Windows.Forms.DataGridView ErrorDataGridView;
+        private System.Windows.Forms.TextBox Tag_tbx;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button Reset_btn;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button BulkInsert_btn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
@@ -397,11 +420,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn UpdatedBy;
         private System.Windows.Forms.DataGridViewTextBoxColumn UpdateDate;
-        private System.Windows.Forms.TextBox Tag_tbx;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button Reset_btn;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button BulkInsert_btn;
+        private System.Windows.Forms.DataGridViewButtonColumn DataGridViewDeleteButton;
     }
 }
 
