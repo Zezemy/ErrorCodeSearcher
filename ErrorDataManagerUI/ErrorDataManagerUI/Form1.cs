@@ -99,7 +99,7 @@ namespace ErrorDataManagerUI
             var anyFormFieldsEmpty = AnyFormFieldsIsEmpty();
             if (anyFormFieldsEmpty)
             {
-                var errorMessageDialogResult = MessageBox.Show("Boş alanları doldurunuz ve gerekli seçimleri yapınız.");
+                FillRequiredFields();
             }
             else
             {
@@ -110,6 +110,20 @@ namespace ErrorDataManagerUI
                     ResetForm();
                 }
             }
+        }
+
+        private void FillRequiredFields()
+        {
+            var strWhenCodeIsEmpty = string.IsNullOrWhiteSpace(ErrorCode_tbx.Text) ? "Error Code alanını doldurun." + Environment.NewLine : string.Empty;
+            var strgWhenDescriptionIsEmpty = string.IsNullOrWhiteSpace(Description_tbx.Text) ? $"Description alanını doldurun. {Environment.NewLine}" : string.Empty;
+            var strWhenCategoryIsEmpty = string.IsNullOrWhiteSpace(Category_cbx.Text) ? $"Category alanını doldurun. {Environment.NewLine}" : string.Empty;
+            var strWhenDeviceClassIsEmpty = string.IsNullOrWhiteSpace(DeviceClass_cbx.Text) ? $"Device Class alanını doldurun. {Environment.NewLine}" : string.Empty;
+
+            var errorMessageDialogResult = MessageBox.Show($"Boş alanları doldurunuz ve gerekli seçimleri yapınız. {Environment.NewLine}" +
+                $"{strWhenCodeIsEmpty}" +
+                $"{strgWhenDescriptionIsEmpty}" +
+                $"{strWhenCategoryIsEmpty}" +
+                $"{strWhenDeviceClassIsEmpty}");
         }
 
         private async Task<ErrorDataResponse> AddErrorData(ErrorData[] errorDataArray)
@@ -142,7 +156,7 @@ namespace ErrorDataManagerUI
                     var anyFormFieldsEmpty = AnyFormFieldsIsEmpty();
                     if (anyFormFieldsEmpty)
                     {
-                        var errorMessageDialogResult = MessageBox.Show("Boş alanları doldurunuz ve gerekli seçimleri yapınız.");
+                        FillRequiredFields();
                     }
                     else
                     {
