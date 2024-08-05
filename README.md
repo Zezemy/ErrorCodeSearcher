@@ -7,9 +7,9 @@ Phase 1 (Client ve Server'dan oluşan hata yönetimi uygulaması yazılması):
     Rest API​,
     Swagger entegrasyonu​,
     HTTP GET, POST, PUT, DELETE metodlarının kullanılması​,
-    Database entegrasyonu (MSSQL)​,
+    Database entegrasyonu (MSSQL)​
 
 ​  Client için gereksinimler:​
     User Interface (UI)​,
     Windows Forms Application​,
-    .Net Framework 4.8,
+    .Net Framework 4.8
