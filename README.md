@@ -2,7 +2,7 @@ Phase 1 (Client ve Server'dan oluşan hata yönetimi uygulaması yazılması):
   Rest API: ErrorDataApi; .Net Core 8​,
   UI: ErrorDataManagerUI; .Net Framework 4.8, Windows Forms Application
 
-  Server için gereksinimler:​
+  Server için gereksinimler:​ 
     .Net Core 8​,
     Rest API​,
     Swagger entegrasyonu​,
