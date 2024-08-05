@@ -123,7 +123,6 @@ function ErrorDataForm() {
             });
         }
     }
-
     function MyComponent() {
         return (
             <DataTable
