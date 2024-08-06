@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
 
 export function SearchErrorDatas(requestBody) {
-    fetch('https://localhost:7139/api/Error/Search', {
+    //console.log("requestBody");
+    //console.log(requestBody);
+    return fetch('https://localhost:7139/api/Error/Search', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
     })
         .then((res) => {
-            var ret = res.json();
-            console.log(ret);
-            return ret;
+            return res.json();
         })
-        .then((data) => {
-            console.log(data);
-        });
 }
 
 export function AddErrorDatas(requestBody) {

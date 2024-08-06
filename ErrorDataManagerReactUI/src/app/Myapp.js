@@ -1,16 +1,12 @@
 import React from 'react';
-import ErrorDataForm from '../components/ErrorDataForm';
-import Fetch from '../components/FetchErrorDatas';
-import Table from "../components/Table";
+import ErrorDataForm from '../features/errorDataForm/errorDataForm';
 import '../App.css';
 
 function Myapp() {
     return (
         <div className="App">
             <header className="App-header">
-                <p>
-                    <ErrorDataForm />
-                </p>
+                <ErrorDataForm />
             </header>
         </div>
     );

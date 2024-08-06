@@ -1,145 +1,96 @@
 import React, { useEffect, useState } from "react";
-import '../App.css';
-/*import Table from "../components/Table";*/
+import '../../App.css';
 import DataTable from 'react-data-table-component';
-import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from '../components/FetchErrorDatas';
-import { createRoot } from 'react-dom/client';
+import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './fetchErrorDatas';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';
+import { setCategory, setDeviceClassName, setErrorCode, selectState } from './errorDataFormSlice';
+import Table from "./Table";
+import { store } from '../../app/Store';
 
 function ErrorDataForm() {
-    const [category, setCategory] = useState("");
-    const [deviceClassName, setDeviceClassName] = useState("");
-    const [code, setCode] = useState("");
+    const dispatch = useDispatch();
+    const selectedRows = useSelector(getSelectedRows);
+    let errorDataFormState = useSelector(selectState);
+
+    /*    const [category, setCategory] = useState("");*/
+    /*   const [deviceClassName, setDeviceClassName] = useState("");*/
+    //const [code, setCode] = useState("");
     const [description, setDescription] = useState("");
     const [tag, setTag] = useState("");
-    const [data, setData] = useState([]);
 
     const handleCategoryChange = (event) => {
-        setCategory(event.target.value)
+        dispatch(setCategory(event.target.value));
+        errorDataFormState = store.getState().errorData;
+        console.log(errorDataFormState);
+
     }
     const handleDeviceClassNameChange = (event) => {
-        setDeviceClassName(event.target.value)
+        dispatch(setDeviceClassName(event.target.value));
+        errorDataFormState = store.getState().errorData;
+        console.log(errorDataFormState);
     }
-    const columns = [
-        {
-            colName: 'id',
-            selector: row => row.id,
-        },
-        {
-            colName: 'code',
-            selector: row => row.code,
-        },
-        {
-            colName: 'description',
-            selector: row => row.description,
-        },
-        {
-            colName: 'category',
-            selector: row => row.category,
-        },
-        {
-            colName: 'deviceClass',
-            selector: row => row.deviceClass,
-        },
-        {
-            colName: 'tag',
-            selector: row => row.tag,
-        },
-        {
-            colName: 'createdBy',
-            selector: row => row.createdBy,
-        },
-        {
-            colName: 'createDate',
-            selector: row => row.createDate,
-        },
-        {
-            colName: 'updatedBy',
-            selector: row => row.updatedBy,
-        },
-        {
-            colName: 'updateDate',
-            selector: row => row.updateDate,
-        },
-        {
-            colName: '',
-            selector: row => row.delete,
-        },
-    ];
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (event.nativeEvent.submitter.name == "search") {
-            var response = SearchErrorDatas({
+            let payload = {
                 "errorDataList": [{
-                    "category": category,
-                    "deviceClassName": deviceClassName,
-                    "code": code,
+                    "category": errorDataFormState.category,
+                    "deviceClassName": errorDataFormState.deviceClassName,
+                    "code": errorDataFormState.code,
                     "description": description,
                     "tag": tag
                 }]
-            });
-            console.log("response value");
-            console.log(response);
-            setData(response);
-            console.log("data value");
-            console.log(data);
-            const commentDomNode = document.getElementById('form');
-            const commentRoot = createRoot(commentDomNode);
-
-            commentRoot.render(<MyComponent />);
-
+            };
+            dispatch(searchAsync(payload));
         }
+
         else if (event.nativeEvent.submitter.name == "add") {
             AddErrorDatas({
                 "errorDataArray": [{
-                    "category": category,
-                    "deviceClassName": deviceClassName,
-                    "code": code,
+                    "category": errorDataFormState.category,
+                    "deviceClassName": errorDataFormState.deviceClassName,
+                    "code": errorDataFormState.code,
                     "description": description,
                     "tag": tag
                 }]
             });
         }
+
         else if (event.nativeEvent.submitter.name == "update") {
             UpdateErrorDatas({
                 "errorDataArray": [{
-                    "category": category,
-                    "deviceClassName": deviceClassName,
-                    "code": code,
+                    "category": errorDataFormState.category,
+                    "deviceClassName": errorDataFormState.deviceClassName,
+                    "code": errorDataFormState.code,
                     "description": description,
                     "tag": tag
                 }]
             });
         }
+
         else if (event.nativeEvent.submitter.name == "delete") {
             DeleteErrorDatas({
                 "errorDataArray": [{
-                    "category": category,
-                    "deviceClassName": deviceClassName,
-                    "code": code,
+                    "category": errorDataFormState.category,
+                    "deviceClassName": errorDataFormState.deviceClassName,
+                    "code": errorDataFormState.code,
                     "description": description,
                     "tag": tag
                 }]
             });
         }
     }
-    function MyComponent() {
-        return (
-            <DataTable
-                columns={columns}
-                data={data}
-            />
-        );
-    };
 
     return (
-        <div id = "form" className="form">
+        <div id="form" className="form">
             <h2>ATM Error Data Manager</h2>
             <header className="form-header">
             </header>
             <form onSubmit={handleSubmit}>
                 <label>Category </label>
-                <select value={category} onChange={handleCategoryChange}>
+                <select id="category_options" value={errorDataFormState.category} onChange={handleCategoryChange}>
                     <option value=""></option>
                     <option value="XFS">XFS</option>
                     <option value="Simax">Simax</option>
@@ -152,7 +103,7 @@ function ErrorDataForm() {
                 <br></br>
                 <br></br>
                 <label>Device Class </label>
-                <select value={deviceClassName} onChange={handleDeviceClassNameChange}>
+                <select value={errorDataFormState.deviceClassName} onChange={handleDeviceClassNameChange}>
                     <option value=""></option>
                     <option value="XFSGeneral">XFSGeneral</option>
                     <option value="PTR">PTR</option>
@@ -176,8 +127,8 @@ function ErrorDataForm() {
                 <br /><br />
                 <label>Error Code
                     <input type="text"
-                        value={code}
-                        onChange={(e) => setCode(e.target.value)} />
+                        value={errorDataFormState.code}
+                        onChange={(e) => dispatch(setErrorCode(e.target.value))} />
                 </label>
                 <br /><br />
                 <label>Description </label>
@@ -192,7 +143,7 @@ function ErrorDataForm() {
             </form>
             <br />
             <div class="container">
-                <MyComponent />
+                <Table />
             </div>
         </div>
     );
