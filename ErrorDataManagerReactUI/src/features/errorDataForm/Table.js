@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from 'react';
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAsync, selectColumns, selectData, selectStatus } from './errorDataApiSearchSlice';
-import { setCategory, setDeviceClassName, setErrorCode, selectState } from './errorDataFormSlice';
+import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
 
 function Table() {
     const dispatch = useDispatch();
@@ -30,7 +30,12 @@ function Table() {
         const handleRowSelected = ({ selectedRows }) => {
             setSelectedRows(selectedRows);
             if (selectedRows.length == 1) {
+                dispatch(setId(selectedRows[0].id));
                 dispatch(setCategory(selectedRows[0].category));
+                dispatch(setDeviceClassName(selectedRows[0].deviceClassName));
+                dispatch(setErrorCode(selectedRows[0].code));
+                dispatch(setDescription(selectedRows[0].description));
+                dispatch(setTag(selectedRows[0].tag));
             }
             else {
                 handleClearRows();
@@ -43,7 +48,6 @@ function Table() {
 
         const contextActions = useMemo(() => {
             const handleDelete = () => {
-                // eslint-disable-next-line no-alert
                 if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.title)}?`)) {
                     setToggleCleared(!toggleCleared);
                     /*                    setData(differenceBy(data, selectedRows, 'title'));*/
@@ -51,21 +55,33 @@ function Table() {
             };
             return <button key="delete" onClick={handleDelete} style={{
                 backgroundColor: 'red'
-            }} icon>
+            }} icon="true">
                 Delete
             </button>;
         }, [data, selectedRows, toggleCleared]);
+
+        const customStyles = {
+            cells: {
+                borderLeftStyle: 'solid',
+                borderLeftWidth: '1px',
+                borderLeftColor: 'black',
+            }
+        };
+
         return (
             <>
-                
                 <DataTable
-                    title=""
+                    title=" "
                     columns={columns}
                     data={data} selectableRows
                     contextActions={contextActions}
                     onSelectedRowsChange={handleRowSelected}
                     clearSelectedRows={toggleCleared}
-                    pagination />;
+                    fixedHeader
+                    pagination
+                    dense
+                    customStyles={customStyles}
+                />;
             </>);
 
         //return (

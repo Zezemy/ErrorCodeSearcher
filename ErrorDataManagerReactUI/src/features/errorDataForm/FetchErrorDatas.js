@@ -42,10 +42,10 @@ export function UpdateErrorDatas(requestBody) {
 }
 
 export function DeleteErrorDatas(requestBody) {
-    fetch('https://localhost:7139/api/Error/Delete', {
+    console.log(requestBody);
+    fetch(`https://localhost:7139/api/Error/Delete?id=${requestBody.id}`, {
         method: 'delete',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody)
+        headers: { 'Content-Type': 'application/json' }
     })
         .then((res) => {
             return res.json();

@@ -18,6 +18,9 @@ export const errorDataSlice = createAppSlice({
     initialState,
 
     reducers: create => ({
+        setId: (state, action) => {
+            state.id = action.payload
+        },
         setCategory: (state, action) => {
             state.category = action.payload
         },
@@ -26,6 +29,12 @@ export const errorDataSlice = createAppSlice({
         },
         setErrorCode: (state, action) => {
             state.code = action.payload
+        },
+        setDescription: (state, action) => {
+            state.description = action.payload
+        },
+        setTag: (state, action) => {
+            state.tag = action.payload
         }
     }),
 
@@ -33,6 +42,5 @@ export const errorDataSlice = createAppSlice({
         selectState: state => state
     },
 })
-
-export const { setCategory, setDeviceClassName, setErrorCode } = errorDataSlice.actions;
+export const { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag } = errorDataSlice.actions;
 export const { selectState } = errorDataSlice.selectors;

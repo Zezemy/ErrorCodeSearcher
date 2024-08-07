@@ -4,7 +4,7 @@ import DataTable from 'react-data-table-component';
 import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './fetchErrorDatas';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';
-import { setCategory, setDeviceClassName, setErrorCode, selectState } from './errorDataFormSlice';
+import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
 import Table from "./Table";
 import { store } from '../../app/Store';
 
@@ -13,11 +13,11 @@ function ErrorDataForm() {
     const selectedRows = useSelector(getSelectedRows);
     let errorDataFormState = useSelector(selectState);
 
-    /*    const [category, setCategory] = useState("");*/
-    /*   const [deviceClassName, setDeviceClassName] = useState("");*/
-    //const [code, setCode] = useState("");
-    const [description, setDescription] = useState("");
-    const [tag, setTag] = useState("");
+/*    const [category, setCategory] = useState("");*/
+/*   const [deviceClassName, setDeviceClassName] = useState("");*/
+/*    const [code, setCode] = useState("");*/
+/*    const [description, setDescription] = useState("");*/
+/*    const [tag, setTag] = useState("");*/
 
     const handleCategoryChange = (event) => {
         dispatch(setCategory(event.target.value));
@@ -39,8 +39,8 @@ function ErrorDataForm() {
                     "category": errorDataFormState.category,
                     "deviceClassName": errorDataFormState.deviceClassName,
                     "code": errorDataFormState.code,
-                    "description": description,
-                    "tag": tag
+                    "description": errorDataFormState.description,
+                    "tag": errorDataFormState.tag
                 }]
             };
             dispatch(searchAsync(payload));
@@ -52,8 +52,8 @@ function ErrorDataForm() {
                     "category": errorDataFormState.category,
                     "deviceClassName": errorDataFormState.deviceClassName,
                     "code": errorDataFormState.code,
-                    "description": description,
-                    "tag": tag
+                    "description": errorDataFormState.description,
+                    "tag": errorDataFormState.tag
                 }]
             });
         }
@@ -61,25 +61,18 @@ function ErrorDataForm() {
         else if (event.nativeEvent.submitter.name == "update") {
             UpdateErrorDatas({
                 "errorDataArray": [{
+                    "id": errorDataFormState.id,
                     "category": errorDataFormState.category,
                     "deviceClassName": errorDataFormState.deviceClassName,
                     "code": errorDataFormState.code,
-                    "description": description,
-                    "tag": tag
+                    "description": errorDataFormState.description,
+                    "tag": errorDataFormState.tag
                 }]
             });
         }
 
         else if (event.nativeEvent.submitter.name == "delete") {
-            DeleteErrorDatas({
-                "errorDataArray": [{
-                    "category": errorDataFormState.category,
-                    "deviceClassName": errorDataFormState.deviceClassName,
-                    "code": errorDataFormState.code,
-                    "description": description,
-                    "tag": tag
-                }]
-            });
+            DeleteErrorDatas({ "id": errorDataFormState.id });
         }
     }
 
@@ -97,8 +90,8 @@ function ErrorDataForm() {
                 </select>
                 <label>Tag
                     <input type="text"
-                        value={tag}
-                        onChange={(e) => setTag(e.target.value)} />
+                        value={errorDataFormState.tag}
+                        onChange={(e) => dispatch(setTag(e.target.value))} />
                 </label>
                 <br></br>
                 <br></br>
@@ -132,7 +125,7 @@ function ErrorDataForm() {
                 </label>
                 <br /><br />
                 <label>Description </label>
-                <textarea name="content" rows={5} cols={45} value={description} onChange={(e) => setDescription(e.target.value)} />
+                <textarea name="content" rows={5} cols={45} value={errorDataFormState.description} onChange={(e) => dispatch(setDescription(e.target.value))} />
                 <br /><br />
                 <input type="submit" name="search" value="Search" />
                 <input type="submit" name="add" value="Add" />
