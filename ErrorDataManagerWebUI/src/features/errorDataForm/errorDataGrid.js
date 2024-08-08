@@ -112,11 +112,11 @@ export default function ErrorDataGrid() {
                 initialState={{
                     pagination: {
                         paginationModel: {
-                            pageSize: 5,
+                            pageSize: 10,
                         },
                     },
                 }}
-                pageSizeOptions={[5]}
+                pageSizeOptions={[10, 25, 50, 100]}
                 checkboxSelection
                 disableRowSelectionOnClick
                 disableMultipleRowSelection
@@ -127,6 +127,7 @@ export default function ErrorDataGrid() {
                     dispatch(setRowSelection(selectedRow));
                 }}
                 rowSelectionModel={rowSelectionModel}
+                rowHeight={35} {...storedData}
             />
         </Box>
     );

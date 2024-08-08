@@ -11,13 +11,14 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@mui/icons-material": "^5.16.6",
     "@mui/material": "next",
     "@mui/x-data-grid": "^7.12.0",
+    "@reduxjs/toolkit": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest",
-    "@reduxjs/toolkit": "latest",
-    "react-redux": "latest"
+    "react-redux": "latest",
+    "react-scripts": "latest"
   },
   "browserslist": {
     "production": [

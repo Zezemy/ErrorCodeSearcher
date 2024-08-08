@@ -55,46 +55,4 @@ export function DeleteErrorDatas(requestBody) {
         });
 }
 
-//fetch('https://localhost:7139/api/Error/Search', {
-//    method: 'post',
-//    headers: { 'Content-Type': 'application/json' },
-//    body: JSON.stringify({
-//        "errorDataArray": [{
-//            "category": category,
-//            "deviceClassName": deviceClassName,
-//            "code": code,
-//            "description": description,
-//            "tag": tag
-//        }]
-//    })
-//});
-
-//fetch('https://localhost:7139/api/Error/Update', {
-//    method: 'put',
-//    headers: { 'Content-Type': 'application/json' },
-//    body: JSON.stringify({
-//        "errorDataArray": [{
-//            "category": category,
-//            "deviceClassName": deviceClassName,
-//            "code": code,
-//            "description": description,
-//            "tag": tag
-//        }]
-//    })
-//});
-
-//fetch('https://localhost:7139/api/Error/Delete', {
-//    method: 'delete',
-//    headers: { 'Content-Type': 'application/json' },
-//    body: JSON.stringify({
-//        "errorDataArray": [{
-//            "category": category,
-//            "deviceClassName": deviceClassName,
-//            "code": code,
-//            "description": description,
-//            "tag": tag
-//        }]
-//    })
-//});
-
 

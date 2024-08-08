@@ -8,14 +8,32 @@ import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, s
 import { setRowSelection } from './appStateSlice';
 import { store } from '../../app/Store';
 import ErrorDataGrid from './errorDataGrid';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+import Button from '@mui/material/Button';
+import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
+import MoveUpIcon from '@mui/icons-material/MoveUp';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
+
 
 function ErrorDataForm() {
     const dispatch = useDispatch();
     const selectedRows = useSelector(getSelectedRows);
     let errorDataFormState = useSelector(selectState);
+
+    const [categoryErrorState, setCategoryErrorState] = useState(false);
+    const [deviceClassNameErrorState, setDeviceClassNameErrorState] = useState(false);
+    const [codeErrorState, setCodeErrorState] = useState(false);
+    const [descriptionErrorState, setDescriptionErrorState] = useState(false);
 
     /*    const [category, setCategory] = useState("");*/
     /*   const [deviceClassName, setDeviceClassName] = useState("");*/
@@ -24,10 +42,14 @@ function ErrorDataForm() {
     /*    const [tag, setTag] = useState("");*/
 
     const handleCategoryChange = (event) => {
+        console.log("handleCategoryChange called");
+        console.log("event");
+        console.log(event);
         dispatch(setCategory(event.target.value));
         errorDataFormState = store.getState().errorData.errorData;
 
     }
+
     const handleDeviceClassNameChange = (event) => {
         dispatch(setDeviceClassName(event.target.value));
         errorDataFormState = store.getState().errorData;
@@ -35,6 +57,8 @@ function ErrorDataForm() {
 
     const handleSubmit = (event) => {
         errorDataFormState = store.getState().errorData.errorData;
+        console.log("errorDataFormState");
+        console.log(errorDataFormState);
         event.preventDefault();
         if (event.nativeEvent.submitter.name == "search") {
             let payload = {
@@ -50,6 +74,31 @@ function ErrorDataForm() {
         }
 
         else if (event.nativeEvent.submitter.name == "add") {
+
+            if (errorDataFormState.category != '') {
+                setCategoryErrorState(false);
+            } else {
+                setCategoryErrorState(true);
+            }
+            if (errorDataFormState.deviceClassName != '') {
+                setDeviceClassNameErrorState(false);
+            }
+            else {
+                setDeviceClassNameErrorState(true);
+            }
+            if (errorDataFormState.code != '') {
+                setCodeErrorState(false);
+            }
+            else {
+                setCodeErrorState(true);
+            }
+            if (errorDataFormState.description != '') {
+                setDescriptionErrorState(false);
+            }
+            else {
+                setDescriptionErrorState(true);
+            }
+
             AddErrorDatas({
                 "errorDataArray": [{
                     "category": errorDataFormState.category,
@@ -88,71 +137,279 @@ function ErrorDataForm() {
         }
     }
 
+    const categories = [
+        {
+            value: '',
+            label: '',
+        },
+        {
+            value: 'XFS',
+            label: 'XFS',
+        },
+        {
+            value: 'Simax',
+            label: 'Simax',
+        },
+    ];
+
+    const deviceClassNames = [
+        {
+            value: '',
+            label: '',
+        },
+        {
+            value: 'XFSGeneral',
+            label: 'XFSGeneral',
+        },
+        {
+            value: 'PTR',
+            label: 'PTR',
+        },
+        {
+            value: 'IDC',
+            label: 'IDC',
+        },
+        {
+            value: 'CDM',
+            label: 'CDM',
+        },
+        {
+            value: 'PIN',
+            label: 'PIN',
+        },
+        {
+            value: 'CHK',
+            label: 'CHK',
+        },
+        {
+            value: 'DEP',
+            label: 'DEP',
+        },
+        {
+            value: 'TTU',
+            label: 'TTU',
+        },
+        {
+            value: 'SIU',
+            label: 'SIU',
+        },
+        {
+            value: 'VDM',
+            label: 'VDM',
+        },
+        {
+            value: 'CAM',
+            label: 'CAM',
+        },
+        {
+            value: 'ALM',
+            label: 'ALM',
+        },
+        {
+            value: 'CEU',
+            label: 'CEU',
+        },
+        {
+            value: 'CIM',
+            label: 'CIM',
+        },
+        {
+            value: 'CRD',
+            label: 'CRD',
+        },
+        {
+            value: 'BCR',
+            label: 'BCR',
+        },
+        {
+            value: 'IPM',
+            label: 'IPM',
+        },
+        {
+            value: 'BIO',
+            label: 'BIO',
+        },
+    ];
+
     return (
         <div id="form" className="form">
-            <h2>ATM Error Data Manager</h2>
             <header className="form-header">
             </header>
-            <form onSubmit={handleSubmit}>
-                <label>Category </label>
-                <select id="category_options" value={errorDataFormState.category} onChange={handleCategoryChange}>
-                    <option value=""></option>
-                    <option value="XFS">XFS</option>
-                    <option value="Simax">Simax</option>
-                </select>
-                <label>Tag
-                    <input type="text"
-                        value={errorDataFormState.tag}
-                        onChange={(e) => dispatch(setTag(e.target.value))} />
-                </label>
-                <br></br>
-                <br></br>
-                <label>Device Class </label>
-                <select value={errorDataFormState.deviceClassName} onChange={handleDeviceClassNameChange}>
-                    <option value=""></option>
-                    <option value="XFSGeneral">XFSGeneral</option>
-                    <option value="PTR">PTR</option>
-                    <option value="IDC">IDC</option>
-                    <option value="CDM">CDM</option>
-                    <option value="PIN">PIN</option>
-                    <option value="CHK">CHK</option>
-                    <option value="DEP">DEP</option>
-                    <option value="TTU">TTU</option>
-                    <option value="SIU">SIU</option>
-                    <option value="VDM">VDM</option>
-                    <option value="CAM">CAM</option>
-                    <option value="ALM">ALM</option>
-                    <option value="CEU">CEU</option>
-                    <option value="CIM">CIM</option>
-                    <option value="CRD">CRD</option>
-                    <option value="BCR">BCR</option>
-                    <option value="IPM">IPM</option>
-                    <option value="BIO">BIO</option>
-                </select>
-                <br /><br />
-                <label>Error Code
-                    <input type="text"
+
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{ display: 'flex' }}
+                noValidate
+                autoComplete="off"
+                sx={{ width: 'auto' }}
+            >
+                <AppBar position="static" color="primary" sx={{ m: 1 }}>
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="default"//inherit
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            ATM Error Data Manager
+                        </Typography>
+                        <Button color="inherit">Logout</Button>
+                    </Toolbar>
+                </AppBar>
+                <div>
+                    <TextField
+                        id="outlined-basic-errorCode"
+                        label="Error Code"
+                        variant="outlined"
+                        size="small"
+                        error={codeErrorState}
                         value={errorDataFormState.code}
-                        onChange={(e) => dispatch(setErrorCode(e.target.value))} />
-                </label>
-                <br /><br />
-                <label>Description </label>
-                <textarea name="content" rows={5} cols={45} value={errorDataFormState.description} onChange={(e) => dispatch(setDescription(e.target.value))} />
-                <br /><br />
-                <input type="submit" name="search" value="Search" />
-                <input type="submit" name="add" value="Add" />
-                <input type="submit" name="bulkInsert" value="Bulk Insert" />
-                <input type="submit" name="update" value="Update" />
-                <input type="submit" name="delete" value="Delete" />
-                <input type="submit" name="reset" value="Reset" />
-            </form>
-            <br />
+                        onChange={(e) => dispatch(setErrorCode(e.target.value))}
+                        sx={{ m: 1, width: '25ch' }}
+                    >
+                    </TextField>
+
+                    <TextField
+                        id="outlined-select-category"
+                        select
+                        label="Category"
+                        defaultValue={errorDataFormState.category}
+                        size="small"
+                        error={categoryErrorState}
+                        value={errorDataFormState.category}
+                        onChange={handleCategoryChange}
+                        sx={{ m: 1, width: '25ch' }}
+                    >
+                        {categories.map((option) => (
+                            <MenuItem key={option.value} value={option.value} sx={{ fontSize: 12 }}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+
+                    <TextField
+                        id="outlined-select-deviceClassName"
+                        select
+                        label="Device Class"
+                        defaultValue=""
+                        size="small"
+                        error={deviceClassNameErrorState}
+                        value={errorDataFormState.deviceClassName}
+                        onChange={handleDeviceClassNameChange}
+                        sx={{ m: 1, width: '25ch' }}
+                    >
+                        {deviceClassNames.map((option) => (
+                            <MenuItem key={option.value} value={option.value} sx={{ fontSize: 12 }}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+
+                    <TextField
+                        id="outlined-basic-tag"
+                        label="Tag"
+                        variant="outlined"
+                        size="small"
+                        value={errorDataFormState.tag}
+                        onChange={(e) => dispatch(setTag(e.target.value))}
+                        sx={{ m: 1, width: '25ch' }}
+                    >
+                    </TextField>
+
+                    <TextField
+                        id="outlined-multiline-static-description"
+                        label="Description"
+                        fullWidth
+                        multiline
+                        rows={3}
+                        defaultValue=""
+                        value={errorDataFormState.description}
+                        onChange={(e) => dispatch(setDescription(e.target.value))}
+                        sx={{ m: 1 }}
+                    >
+                    </TextField>
+
+                    <Button
+                        variant="outlined"
+                        color="info"//secondary, info
+                        type="submit"
+                        name="search"
+                        value="Search"
+                        sx={{ m: 1 }}
+                        startIcon={<SearchIcon />}
+                    >
+                        Search
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="success"
+                        type="submit"
+                        name="add"
+                        value="Add"
+                        sx={{ m: 1 }}
+                        startIcon={<AddIcon />}
+                    >
+                        Add
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        name="update"
+                        value="Update"
+                        sx={{ m: 1 }}
+                        startIcon={<MoveUpIcon />}
+                    >
+                        Update
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="error"
+                        type="submit"
+                        name="delete"
+                        value="Delete"
+                        sx={{ m: 1 }}
+                        startIcon={<DeleteIcon />}
+                    >
+                        Delete
+                    </Button>
+
+                    <Button
+                        variant="outlined"
+                        color="warning"
+                        type="submit"
+                        name="reset"
+                        value="Reset"
+                        sx={{ m: 1 }}
+                        startIcon={<CleaningServicesIcon />}
+                    >
+                        Reset
+                    </Button>
+
+                    <Button
+                        variant="outlined"
+                        color="inherit"
+                        type="submit"
+                        name="bulkInsert"
+                        value="Bulk Insert"
+                        sx={{ m: 1 }}
+                        startIcon={<FileUploadIcon />}
+                    >
+                        Bulk Insert
+                    </Button>
+                </div>
+            </Box >
             <div class="container">
                 <ErrorDataGrid />
-                {/*<Table />*/}
             </div>
-        </div>
+        </div >
     );
 }
-
 export default ErrorDataForm;
