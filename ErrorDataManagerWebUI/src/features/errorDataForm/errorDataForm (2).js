@@ -1,0 +1,200 @@
+import React, { useEffect, useState } from "react";
+import '../../App.css';
+/*import DataTable from 'react-data-table-component';*/
+import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './fetchErrorDatas';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';
+import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
+import { setRowSelection } from './appStateSlice';
+import { store } from '../../app/Store';
+import ErrorDataGrid from './errorDataGrid';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+
+function ErrorDataForm() {
+    const dispatch = useDispatch();
+    const selectedRows = useSelector(getSelectedRows);
+    let errorDataFormState = useSelector(selectState);
+
+    /*    const [category, setCategory] = useState("");*/
+    /*   const [deviceClassName, setDeviceClassName] = useState("");*/
+    /*    const [code, setCode] = useState("");*/
+    /*    const [description, setDescription] = useState("");*/
+    /*    const [tag, setTag] = useState("");*/
+
+    const handleCategoryChange = (event) => {
+        dispatch(setCategory(event.target.value));
+        errorDataFormState = store.getState().errorData.errorData;
+
+    }
+    const handleDeviceClassNameChange = (event) => {
+        dispatch(setDeviceClassName(event.target.value));
+        errorDataFormState = store.getState().errorData;
+    }
+
+    const handleSubmit = (event) => {
+        errorDataFormState = store.getState().errorData.errorData;
+        event.preventDefault();
+        if (event.nativeEvent.submitter.name == "search") {
+            let payload = {
+                "errorDataList": [{
+                    "category": errorDataFormState.category,
+                    "deviceClassName": errorDataFormState.deviceClassName,
+                    "code": errorDataFormState.code,
+                    "description": errorDataFormState.description,
+                    "tag": errorDataFormState.tag
+                }]
+            };
+            dispatch(searchAsync(payload));
+        }
+
+        else if (event.nativeEvent.submitter.name == "add") {
+            AddErrorDatas({
+                "errorDataArray": [{
+                    "category": errorDataFormState.category,
+                    "deviceClassName": errorDataFormState.deviceClassName,
+                    "code": errorDataFormState.code,
+                    "description": errorDataFormState.description,
+                    "tag": errorDataFormState.tag
+                }]
+            });
+        }
+
+        else if (event.nativeEvent.submitter.name == "update") {
+            UpdateErrorDatas({
+                "errorDataArray": [{
+                    "id": errorDataFormState.id,
+                    "category": errorDataFormState.category,
+                    "deviceClassName": errorDataFormState.deviceClassName,
+                    "code": errorDataFormState.code,
+                    "description": errorDataFormState.description,
+                    "tag": errorDataFormState.tag
+                }]
+            });
+        }
+
+        else if (event.nativeEvent.submitter.name == "delete") {
+            DeleteErrorDatas({ "id": errorDataFormState.id });
+        }
+        else if (event.nativeEvent.submitter.name == "reset") {
+            dispatch(setId(0));
+            dispatch(setCategory(''));
+            dispatch(setDeviceClassName(''));
+            dispatch(setErrorCode(''));
+            dispatch(setDescription(''));
+            dispatch(setTag(''));
+            dispatch(setRowSelection([]));
+        }
+    }
+
+    const categories = [
+        {
+            value: '',
+            label: ' ',
+        },
+        {
+            value: 'XFS',
+            label: 'XFS',
+        },
+        {
+            value: 'Simax',
+            label: 'Simax',
+        },
+    ];
+
+    return (
+        <div id="form" className="form">
+            <h2>ATM Error Data Manager</h2>
+            <header className="form-header">
+            </header>
+            {/*<form onSubmit={handleSubmit}>*/}
+            {/*    <label>Category </label>*/}
+
+            <Box
+                component="form"
+                sx={{
+                    '& > :not(style)': { m: 1, width: '25ch', color: 'black' },
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                <div>
+                    <TextField
+                        id="outlined-select-category"
+                        select
+                        label="Category"
+                        defaultValue=""
+                        helperText="Please select category"
+                    >
+                        {categories.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                </div>
+
+
+                <select id="category_options" value={errorDataFormState.category} onChange={handleCategoryChange}>
+                    <option value=""></option>
+                    <option value="XFS">XFS</option>
+                    <option value="Simax">Simax</option>
+                </select>
+                <label>Tag
+                    <input type="text"
+                        value={errorDataFormState.tag}
+                        onChange={(e) => dispatch(setTag(e.target.value))} />
+                </label>
+                <br></br>
+                <br></br>
+                <label>Device Class </label>
+                <select value={errorDataFormState.deviceClassName} onChange={handleDeviceClassNameChange}>
+                    <option value=""></option>
+                    <option value="XFSGeneral">XFSGeneral</option>
+                    <option value="PTR">PTR</option>
+                    <option value="IDC">IDC</option>
+                    <option value="CDM">CDM</option>
+                    <option value="PIN">PIN</option>
+                    <option value="CHK">CHK</option>
+                    <option value="DEP">DEP</option>
+                    <option value="TTU">TTU</option>
+                    <option value="SIU">SIU</option>
+                    <option value="VDM">VDM</option>
+                    <option value="CAM">CAM</option>
+                    <option value="ALM">ALM</option>
+                    <option value="CEU">CEU</option>
+                    <option value="CIM">CIM</option>
+                    <option value="CRD">CRD</option>
+                    <option value="BCR">BCR</option>
+                    <option value="IPM">IPM</option>
+                    <option value="BIO">BIO</option>
+                </select>
+                <br /><br />
+                <label>Error Code
+                    <input type="text"
+                        value={errorDataFormState.code}
+                        onChange={(e) => dispatch(setErrorCode(e.target.value))} />
+                </label>
+                <br /><br />
+                <label>Description </label>
+                <textarea name="content" rows={5} cols={45} value={errorDataFormState.description} onChange={(e) => dispatch(setDescription(e.target.value))} />
+                <br /><br />
+                <input type="submit" name="search" value="Search" />
+                <input type="submit" name="add" value="Add" />
+                <input type="submit" name="bulkInsert" value="Bulk Insert" />
+                <input type="submit" name="update" value="Update" />
+                <input type="submit" name="delete" value="Delete" />
+                <input type="submit" name="reset" value="Reset" />
+                {/*            </form>*/}
+            </Box>
+            <br />
+            <div class="container">
+                <ErrorDataGrid />
+                {/*<Table />*/}
+            </div>
+        </div>
+    );
+}
+
+export default ErrorDataForm;
