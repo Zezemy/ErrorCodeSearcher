@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import '../../App.css';
-/*import DataTable from 'react-data-table-component';*/
 import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './fetchErrorDatas';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';

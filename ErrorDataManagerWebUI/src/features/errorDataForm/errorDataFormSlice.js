@@ -1,4 +1,4 @@
-import { createAppSlice } from '../../app/createAppSlice';
+import { CreateAppSlice } from '../../app/CreateAppSlice';
 
 const initialState = {
     errorData: {
@@ -15,7 +15,7 @@ const initialState = {
     }
 }
 
-export const errorDataSlice = createAppSlice({
+export const errorDataSlice = CreateAppSlice({
     name: "errorData",
     initialState,
 

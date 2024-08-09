@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import '../../App.css';
-/*import DataTable from 'react-data-table-component';*/
 import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './fetchErrorDatas';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';
@@ -23,6 +22,7 @@ import MoveUpIcon from '@mui/icons-material/MoveUp';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
+import Logout from '../components/Logout'
 
 
 function ErrorDataForm() {
@@ -258,7 +258,9 @@ function ErrorDataForm() {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             ATM Error Data Manager
                         </Typography>
-                        <Button color="inherit">Logout</Button>
+
+                        <Logout />
+
                     </Toolbar>
                 </AppBar>
                 <div>
@@ -328,6 +330,7 @@ function ErrorDataForm() {
                         multiline
                         rows={3}
                         defaultValue=""
+                        error={descriptionErrorState}
                         value={errorDataFormState.description}
                         onChange={(e) => dispatch(setDescription(e.target.value))}
                         sx={{ m: 1 }}

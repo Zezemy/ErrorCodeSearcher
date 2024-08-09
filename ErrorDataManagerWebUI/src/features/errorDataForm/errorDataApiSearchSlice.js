@@ -1,4 +1,4 @@
-import { createAppSlice } from '../../app/createAppSlice';
+import { CreateAppSlice } from '../../app/CreateAppSlice';
 import { SearchErrorDatas } from './fetchErrorDatas';
 
 const initialState = {
@@ -49,7 +49,7 @@ const initialState = {
     selectedRows: [],
 }
 
-export const searchSlice = createAppSlice({
+export const searchSlice = CreateAppSlice({
     name: "search",
     initialState,
     reducers: create => ({
