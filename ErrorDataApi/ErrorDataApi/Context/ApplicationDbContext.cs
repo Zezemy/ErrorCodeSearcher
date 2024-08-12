@@ -8,5 +8,7 @@ namespace ErrorDataApi.Context
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<ErrorData> ErrorDatas { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserType> UserTypes { get; set; }
     }
 }

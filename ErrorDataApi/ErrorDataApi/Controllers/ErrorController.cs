@@ -8,7 +8,7 @@ namespace ErrorDataApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class ErrorController : ControllerBase
+    public class ErrorController : ApiControllerBase
     {
         static List<ErrorData> errorDatas = new List<ErrorData>();
 
@@ -92,7 +92,6 @@ namespace ErrorDataApi.Controllers
         {
             var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.Description)).Select(x => x.Description);
             return errorDatas.Where(x => list.Contains(x.Description));
-
         }
 
         private IQueryable<ErrorData> FilterByCategoryList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
@@ -104,14 +103,12 @@ namespace ErrorDataApi.Controllers
         {
             var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.DeviceClassName)).Select(x => x.DeviceClassName);
             return errorDatas.Where(x => list.Contains(x.DeviceClassName));
-
         }
 
         private IQueryable<ErrorData> FilterByTagList(SearchErrorRequest req, IQueryable<ErrorData> errorDatas)
         {
             var list = req.ErrorDataList.Where(x => !string.IsNullOrWhiteSpace(x.Tag)).Select(x => x.Tag);
             return errorDatas.Where(x => list.Contains(x.Tag));
-
         }
 
         private IQueryable<ErrorData> FilterByErrorData(SearchErrorRequest req)
@@ -131,6 +128,7 @@ namespace ErrorDataApi.Controllers
             {
                 return _context.ErrorDatas.Where(x => x.Description == description);
             }
+
             if (!string.IsNullOrEmpty(category))
             {
                 return _context.ErrorDatas.Where(x => x.Category == category);
@@ -145,7 +143,6 @@ namespace ErrorDataApi.Controllers
             {
                 return _context.ErrorDatas.Where(x => x.Tag == tag);
             }
-
             return result;
         }
 
@@ -157,8 +154,9 @@ namespace ErrorDataApi.Controllers
             };
         }
 
+
         [HttpPost(Name = "AddAsync")]
-        public async Task<ErrorDataResponse> AddAsync([FromBody] ErrorDataRequest req)
+        public async Task<BaseResponse> AddAsync([FromBody] ErrorDataRequest req)
         {
             if (req.ErrorDataArray.Any(x => AnyFieldsEmpty(x)))
             {
@@ -169,17 +167,9 @@ namespace ErrorDataApi.Controllers
             return ReturnResponseMessage("0", "İşlem başarılı.");
         }
 
-        private static ErrorDataResponse ReturnResponseMessage(string code, string description)
-        {
-            return new ErrorDataResponse()
-            {
-                ResponseCode = code,
-                ResponseDescription = description
-            };
-        }
 
         [HttpPut(Name = "UpdateAsync")]
-        public async Task<ErrorDataResponse> UpdateAsync([FromBody] ErrorDataRequest req)
+        public async Task<BaseResponse> UpdateAsync([FromBody] ErrorDataRequest req)
         {
             foreach (var errorDataFromRequest in req.ErrorDataArray)
             {
@@ -205,13 +195,13 @@ namespace ErrorDataApi.Controllers
                 else
                     return ReturnResponseMessage("3", "İşlem başarısız. Desteklenmeyen cihaz tipi.");
             }
-
             _context.SaveChanges();
             return ReturnResponseMessage("0", "İşlem başarılı.");
         }
 
+
         [HttpDelete(Name = "DeleteAsync")]
-        public async Task<ErrorDataResponse> DeleteAsync(long id)
+        public async Task<BaseResponse> DeleteAsync(long id)
         {
             var errorData = _context.ErrorDatas.Where(x => x.Id == id).FirstOrDefault();
             if (errorData == null)
