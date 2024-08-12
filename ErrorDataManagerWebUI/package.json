@@ -15,18 +15,19 @@
     "@mui/material": "next",
     "@mui/x-data-grid": "^7.12.0",
     "@reduxjs/toolkit": "latest",
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/user-event": "latest",
+    "crypto-js": "^4.2.0",
+    "history": "^5.1.0",
+    "query-string": "^7.0.1",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "latest",
     "react-router-dom": "latest",
     "react-scripts": "latest",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
-    "@testing-library/user-event": "latest",
-    "web-vitals": "latest",
-    "history": "^5.1.0",
-    "query-string": "^7.0.1",
-    "use-query-params": "^1.2.3"
+    "use-query-params": "^1.2.3",
+    "web-vitals": "latest"
   },
   "browserslist": {
     "production": [

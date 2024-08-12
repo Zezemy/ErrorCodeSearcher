@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-    Routes,
-    Route,
-} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ErrorDataManager from './app/ErrorDataManager';
 import NoPage from './pages/NoPage';
 import AdminDashboard from './pages/AdminDashboard';

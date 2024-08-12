@@ -14,6 +14,7 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
+import sha256 from 'crypto-js/sha256';
 
 function Copyright(props) {
     return (
@@ -32,6 +33,7 @@ export default function Login() {
     const { onLogin } = useAuth();
     const dispatch = useDispatch();
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -39,8 +41,9 @@ export default function Login() {
             userName: data.get('userName'),
             password: data.get('password'),
         });
+        const hash = sha256(data.get('password'));
         dispatch(setUsername(data.get('userName')));
-        dispatch(setPassword(data.get('password')));
+        dispatch(setPassword(hash));
         onLogin();
     };
 
