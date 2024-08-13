@@ -65,11 +65,10 @@ namespace ErrorDataApi.Controllers
             }
             else
             {
-
                 if (req.ErrorDataList.Count == 1)
                 {
                     result = FilterByErrorData(req);
-                    return ReturnSearhResult(result);
+                    return ReturnSearchResult(result);
                 }
 
                 result = FilterByCodeList(req, result);
@@ -78,7 +77,7 @@ namespace ErrorDataApi.Controllers
                 result = FilterByDeviceClassNameList(req, result);
                 result = FilterByTagList(req, result);
 
-                return ReturnSearhResult(result);
+                return ReturnSearchResult(result);
             }
         }
 
@@ -146,7 +145,7 @@ namespace ErrorDataApi.Controllers
             return result;
         }
 
-        private static SearchResult ReturnSearhResult(IQueryable<ErrorData> result)
+        private static SearchResult ReturnSearchResult(IQueryable<ErrorData> result)
         {
             return new SearchResult()
             {

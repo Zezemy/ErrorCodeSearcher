@@ -3,7 +3,6 @@ using Entities.Dto;
 using ErrorDataApi.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using static Entities.Dto.Enums;
 
 namespace ErrorDataApi.Controllers
 {
@@ -21,7 +20,7 @@ namespace ErrorDataApi.Controllers
         }
 
         [HttpGet]
-        public async Task<UserSearchResponse> GetAsyncById(long id)
+        public async Task<UserSearchResponse> GetByIdAsync(long id)
         {
             try
             {
@@ -44,7 +43,7 @@ namespace ErrorDataApi.Controllers
         }
 
         [HttpGet]
-        public async Task<BaseResponse> GetAsyncByUserName(string? userName)
+        public async Task<BaseResponse> GetByUserNameAsync(string? userName)
         {
             try
             {
@@ -64,6 +63,90 @@ namespace ErrorDataApi.Controllers
             {
                 throw ex;
             }
+        }
+
+
+        [HttpPost]
+        public async Task<SearchUserResult> SearchUserAsync([FromBody] SearchUserRequest req)
+        {
+            IQueryable<User> result = _context.Users;
+            if (req.UserDataList == null || !req.UserDataList.Any() || (req.UserDataList.Count == 1 && AreFieldsEmpty(req.UserDataList[0])))
+            {
+                return new SearchUserResult()
+                {
+                    Data = result.ToList()
+                };
+            }
+            else
+            {
+                if (req.UserDataList.Count == 1)
+                {
+                    result = FilterByUserData(req);
+                    return ReturnSearchResult(result);
+                }
+
+                result = FilterByUserNameList(req, result);
+                result = FilterByPasswordList(req, result);
+                result = FilterByUserTypeList(req, result);
+
+                return ReturnSearchResult(result);
+            }
+        }
+
+        private IQueryable<User> FilterByUserNameList(SearchUserRequest req, IQueryable<User> users)
+        {
+            var list = req.UserDataList.Where(x => !string.IsNullOrWhiteSpace(x.UserName)).Select(x => x.UserName);
+            return users.Where(x => list.Contains(x.UserName));
+
+        }
+        private IQueryable<User> FilterByPasswordList(SearchUserRequest req, IQueryable<User> users)
+        {
+            var list = req.UserDataList.Where(x => !string.IsNullOrWhiteSpace(x.Password)).Select(x => x.Password);
+            return users.Where(x => list.Contains(x.Password));
+        }
+
+        private IQueryable<User> FilterByUserTypeList(SearchUserRequest req, IQueryable<User> users)
+        {
+            var list = req.UserDataList.Where(x => x.UserType > 0).Select(x => x.UserType);
+            return users.Where(x => list.Contains(x.UserType));
+        }
+        private IQueryable<User> FilterByUserData(SearchUserRequest req)
+        {
+            IQueryable<User> result = _context.Users;
+            var userName = req.UserDataList[0].UserName;
+            var password = req.UserDataList[0].Password;
+            var userType = req.UserDataList[0].UserType;
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                return _context.Users.Where(x => x.UserName == userName);
+            }
+
+            if (!string.IsNullOrEmpty(password))
+            {
+                return _context.Users.Where(x => x.Password == password);
+            }
+
+            if (userType > 0)
+            {
+                return _context.Users.Where(x => x.UserType == userType);
+            }
+            return result;
+        }
+
+        private static SearchUserResult ReturnSearchResult(IQueryable<User> result)
+        {
+            return new SearchUserResult()
+            {
+                Data = result.ToList()
+            };
+        }
+        private bool AreFieldsEmpty(User data)
+        {
+            var isUserNameEmpty = string.IsNullOrWhiteSpace(data.UserName);
+            var isPasswordEmpty = string.IsNullOrWhiteSpace(data.Password);
+            var isUserTypeValid = data.UserType > 0;
+            return isUserNameEmpty && isPasswordEmpty && !isUserTypeValid;
         }
 
 
