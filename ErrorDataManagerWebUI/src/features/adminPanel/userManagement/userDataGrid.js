@@ -2,77 +2,35 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { selectData } from './errorDataApiSearchSlice';
-import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
-import { selectRowSelectionModel, setRowSelection } from '../../app/AppStateSlice';
-import { store } from '../../app/Store';
+import { selectData } from './userDataApiSearchSlice';
+import { setId, setUserName, setPassword, setUserType } from './userDataFormSlice';
+import { selectRowSelectionModel, setRowSelection } from '../../../app/AppStateSlice';
+import { store } from '../../../app/Store';
 
 const columns = [
     { field: 'id', headerName: 'Id', width: 90 },
     {
-        field: 'code',
-        headerName: 'Code',
+        field: 'userName',
+        headerName: 'UserName',
         width: 150,
         editable: true,
     },
     {
-        field: 'description',
-        headerName: 'Description',
+        field: 'password',
+        headerName: 'Password',
         width: 150,
         editable: true,
     },
     {
-        field: 'category',
-        headerName: 'Category',
-        type: 'number',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'deviceClassName',
-        headerName: 'DeviceClassName',
-        type: 'number',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'tag',
-        headerName: 'Tag',
-        type: 'number',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'createdBy',
-        headerName: 'CreatedBy',
-        type: 'number',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'createDate',
-        headerName: 'CreateDate',
-        type: 'number',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'updatedBy',
-        headerName: 'UpdatedBy',
-        type: 'number',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'updateDate',
-        headerName: 'UpdateDate',
+        field: 'userType',
+        headerName: 'UserType',
         type: 'number',
         width: 110,
         editable: true,
     },
 ];
 
-export default function ErrorDataGrid() {
+export default function UserDataGrid() {
     const dispatch = useDispatch();
     const storedData = useSelector(selectData);
     var rowSelectionModel = useSelector(selectRowSelectionModel);
@@ -86,11 +44,9 @@ export default function ErrorDataGrid() {
             console.log("selected");
             console.log(selected);
             dispatch(setId(selected.id));
-            dispatch(setCategory(selected.category));
-            dispatch(setDeviceClassName(selected.deviceClassName));
-            dispatch(setErrorCode(selected.code));
-            dispatch(setDescription(selected.description));
-            dispatch(setTag(selected.tag));
+            dispatch(setUserName(selected.userName));
+            dispatch(setPassword(selected.password));
+            dispatch(setUserType(selected.userType));
             rowSelectionModel = store.getState().appState.rowSelectionModel;
             console.log("rowSelectionModel");
             console.log(rowSelectionModel);

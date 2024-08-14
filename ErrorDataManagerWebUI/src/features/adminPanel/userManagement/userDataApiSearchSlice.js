@@ -1,5 +1,5 @@
-import { CreateAppSlice } from '../../app/CreateAppSlice';
-import { SearchErrorDatas } from './errorDataApi';
+import { CreateAppSlice } from '../../../app/CreateAppSlice';
+import { SearchUserDatas } from './userDataApi';
 
 const initialState = {
     value: [],
@@ -10,41 +10,17 @@ const initialState = {
             selector: row => row.id,
         },
         {
-            name: 'Code',
+            name: 'UserName',
             selector: row => row.code,
         },
         {
-            name: 'Description',
+            name: 'Password',
             selector: row => row.description,
         },
         {
-            name: 'Category',
+            name: 'UserType',
             selector: row => row.category,
         },
-        {
-            name: 'DeviceClassName',
-            selector: row => row.deviceClassName,
-        },
-        {
-            name: 'Tag',
-            selector: row => row.tag,
-        },
-        {
-            name: 'CreatedBy',
-            selector: row => row.createdBy,
-        },
-        {
-            name: 'CreateDate',
-            selector: row => row.createDate,
-        },
-        {
-            name: 'UpdatedBy',
-            selector: row => row.updatedBy,
-        },
-        {
-            name: 'UpdateDate',
-            selector: row => row.updateDate,
-        }
     ],
     selectedRows: [],
 }
@@ -59,7 +35,7 @@ export const searchSlice = CreateAppSlice({
 
         searchAsync: create.asyncThunk(
             async payload => {
-                const response = await SearchErrorDatas(payload)
+                const response = await SearchUserDatas(payload)
                 console.log("response:")
                 console.log(response)
                 return response.data

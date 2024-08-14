@@ -2,9 +2,10 @@ import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { searchSlice } from '../features/errorDataForm/errorDataApiSearchSlice';
 import { errorDataSlice } from '../features/errorDataForm/errorDataFormSlice';
-import { appStateSlice } from '../features/errorDataForm/appStateSlice';
+import { userDataSlice } from '../features/adminPanel/userManagement/userDataFormSlice';
+import { AppStateSlice } from './AppStateSlice';
 
-const rootReducer = combineSlices(searchSlice, errorDataSlice, appStateSlice); //creating global state
+const rootReducer = combineSlices(searchSlice, errorDataSlice, userDataSlice, AppStateSlice); //creating global state
 
 export const makeStore = preloadedState => {
     const store = configureStore({

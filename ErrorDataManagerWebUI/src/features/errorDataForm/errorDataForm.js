@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import '../../App.css';
-import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './fetchErrorDatas';
+import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './errorDataApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';
 import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
-import { setRowSelection } from './appStateSlice';
+import { setRowSelection } from '../../app/AppStateSlice';
 import { store } from '../../app/Store';
 import ErrorDataGrid from './errorDataGrid';
 import AppBar from '@mui/material/AppBar';
@@ -22,8 +22,7 @@ import MoveUpIcon from '@mui/icons-material/MoveUp';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
-import Logout from '../components/Logout'
-
+import Logout from '../../components/Logout'
 
 function ErrorDataForm() {
     const dispatch = useDispatch();
@@ -47,7 +46,6 @@ function ErrorDataForm() {
         console.log(event);
         dispatch(setCategory(event.target.value));
         errorDataFormState = store.getState().errorData.errorData;
-
     }
 
     const handleDeviceClassNameChange = (event) => {
@@ -60,6 +58,7 @@ function ErrorDataForm() {
         console.log("errorDataFormState");
         console.log(errorDataFormState);
         event.preventDefault();
+
         if (event.nativeEvent.submitter.name == "search") {
             let payload = {
                 "errorDataList": [{
@@ -77,7 +76,8 @@ function ErrorDataForm() {
 
             if (errorDataFormState.category != '') {
                 setCategoryErrorState(false);
-            } else {
+            }
+            else {
                 setCategoryErrorState(true);
             }
             if (errorDataFormState.deviceClassName != '') {
@@ -126,6 +126,7 @@ function ErrorDataForm() {
         else if (event.nativeEvent.submitter.name == "delete") {
             DeleteErrorDatas({ "id": errorDataFormState.id });
         }
+
         else if (event.nativeEvent.submitter.name == "reset") {
             dispatch(setId(0));
             dispatch(setCategory(''));

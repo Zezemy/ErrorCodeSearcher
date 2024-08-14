@@ -1,4 +1,4 @@
-import { CreateAppSlice } from '../../app/CreateAppSlice';
+import { CreateAppSlice } from './CreateAppSlice';
 
 const initialState = {
     rowSelectionModel: [],
@@ -8,7 +8,7 @@ const initialState = {
     }
 }
 
-export const appStateSlice = CreateAppSlice({
+export const AppStateSlice = CreateAppSlice({
     name: "appState",
     initialState,
 
@@ -31,5 +31,5 @@ export const appStateSlice = CreateAppSlice({
         selectUser: state => state.user
     },
 })
-export const { setRowSelection, setUsername, setPassword } = appStateSlice.actions;
-export const { selectRowSelectionModel, selectUser } = appStateSlice.selectors;
+export const { setRowSelection, setUsername, setPassword } = AppStateSlice.actions;
+export const { selectRowSelectionModel, selectUser } = AppStateSlice.selectors;

@@ -8,10 +8,13 @@ import theme from './theme';
 import { store } from './app/Store';
 import {
     BrowserRouter,
+    HashRouter,
     useNavigate,
     useLocation,
 } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
+
+import { AuthProvider, useAuth } from './auth/AuthContext';
 
 const RouteAdapter = ({ children }) => {
     const navigate = useNavigate();
@@ -36,14 +39,16 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
     <BrowserRouter>
-        <QueryParamProvider ReactRouterRoute={RouteAdapter}>
-            <Provider store={store}>
-                <ThemeProvider theme={theme}>
-                    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                    <CssBaseline />
-                    <App />
-                </ThemeProvider>
-            </Provider>
-        </QueryParamProvider>
+        <AuthProvider>
+            <QueryParamProvider ReactRouterRoute={RouteAdapter}>
+                <Provider store={store}>
+                    <ThemeProvider theme={theme}>
+                        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                        <CssBaseline />
+                        <App />
+                    </ThemeProvider>
+                </Provider>
+            </QueryParamProvider>
+        </AuthProvider>
     </BrowserRouter>
 );

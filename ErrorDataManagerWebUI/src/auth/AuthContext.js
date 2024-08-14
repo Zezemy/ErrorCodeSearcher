@@ -2,46 +2,47 @@ import React, { createContext, useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { store } from '../app/Store';
 
-const fakeAuth = () =>
+const fakeAuth = (isAdmin) =>
     new Promise((resolve) => {
-        setTimeout(() => resolve('123123'), 250);
+        setTimeout(() => resolve({
+            authUser: {
+                userName: "zeynep",
+                userType: isAdmin ? 1 : 2,
+                token: "123123"
+            }
+        }), 250);
     });
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [token, setToken] = useState(null);
 
     const handleLogin = async () => {
-        const token = await fakeAuth();
         let user = store.getState().appState.user;
+        const response = await fakeAuth(user.userName==='admin');
 
-        setToken(token);
-        console.log(token);
-
-        let origin = location.state?.from?.pathname || '/dashboard';
-
-        console.log(user);
-        if (user.userName === 'admin') {
-            console.log("userName is admin");
-            origin = '/admin';
+        localStorage.setItem('authUser', JSON.stringify(response.authUser));
+        console.log("navigate on login");
+        if (response.authUser.userType === 1) {
+            console.log("/admin");
+            navigate('/admin');
         }
         else {
-            origin = '/dashboard';
+            console.log("/dashboard");
+            navigate('/dashboard');
         }
-        navigate(origin);
     };
 
     const handleLogout = () => {
         console.log("handlelogout");
-        setToken(null);
+        localStorage.setItem('authUser', JSON.stringify({}));
+        navigate('/');
     };
 
     const value = {
-        token,
         onLogin: handleLogin,
         onLogout: handleLogout,
     };
