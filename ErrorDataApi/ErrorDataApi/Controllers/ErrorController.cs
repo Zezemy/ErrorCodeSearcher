@@ -47,7 +47,6 @@ namespace ErrorDataApi.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

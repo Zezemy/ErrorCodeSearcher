@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entities.Dto
 {
-    public class User
+    public class AuthenticatedUser
     {
         public long Id { get; set; }
+        public string Token { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
         public int UserType { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime? CreateDate { get; set; }
