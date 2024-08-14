@@ -29,18 +29,14 @@ export default function Login() {
     const { onLogin } = useAuth();
     const dispatch = useDispatch();
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            userName: data.get('userName'),
-            password: data.get('password'),
-        });
-        const hash = sha256(data.get('password'));
+        const hash = sha256(data.get('password')).toString();
         dispatch(setUsername(data.get('userName')));
         dispatch(setPassword(hash));
         onLogin();
-
     };
 
     return (

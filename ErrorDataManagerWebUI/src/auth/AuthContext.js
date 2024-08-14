@@ -13,6 +13,17 @@ const fakeAuth = (isAdmin) =>
         }), 250);
     });
 
+function LoginUser(requestBody) {
+   return fetch('https://localhost:7139/api/Authentication/LoginUser', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
+    })
+        .then((res) => {
+            return res.json();
+        })
+}
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -22,11 +33,16 @@ export const AuthProvider = ({ children }) => {
 
     const handleLogin = async () => {
         let user = store.getState().appState.user;
-        const response = await fakeAuth(user.userName==='admin');
-
-        localStorage.setItem('authUser', JSON.stringify(response.authUser));
+        let request = {
+            "userName": user.userName,
+            "password": user.password
+        }
+        const response = await LoginUser(request);
+        console.log('response');
+        console.log(response);
+        localStorage.setItem('authUser', JSON.stringify(response.user));
         console.log("navigate on login");
-        if (response.authUser.userType === 1) {
+        if (response.user.userType === 1) {
             console.log("/admin");
             navigate('/admin');
         }

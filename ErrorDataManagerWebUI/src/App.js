@@ -46,19 +46,4 @@ const App = () => {
     );
 };
 
-//const Navigation = () => {
-//    const { token, onLogout } = useAuth();
-
-//    return (
-//        <nav>
-
-//            {token && (
-//                <button type="button" onClick={onLogout}>
-//                    Sign Out
-//                </button>
-//            )}
-//        </nav>
-//    );
-//};
-
 export default App;

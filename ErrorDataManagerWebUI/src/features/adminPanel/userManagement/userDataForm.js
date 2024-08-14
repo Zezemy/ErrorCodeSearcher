@@ -7,20 +7,16 @@ import { setId, setUserName, setPassword, setUserType, selectState } from './use
 import { setRowSelection } from '../../../app/AppStateSlice';
 import { store } from '../../../app/Store';
 import UserDataGrid from './userDataGrid';
-
-
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import MoveUpIcon from '@mui/icons-material/MoveUp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
-
-
+import sha256 from 'crypto-js/sha256';
 
 function UserDataForm() {
     const dispatch = useDispatch();
@@ -41,7 +37,7 @@ function UserDataForm() {
     }
 
     const handlePasswordChange = (event) => {
-        dispatch(setPassword(event.target.value));
+        dispatch(setPassword(sha256(event.target.value).toString()));
         userDataFormState = store.getState().userData;
     }
 
@@ -86,6 +82,7 @@ function UserDataForm() {
             AddUserDatas({
                 "userDataArray": [{
                     "userName": userDataFormState.userName,
+                    //"password": sha256(userDataFormState.password).toString(),
                     "password": userDataFormState.password,
                     "userType": userDataFormState.userType
                 }]
@@ -158,8 +155,9 @@ function UserDataForm() {
                         id="outlined-password"
                         label="Password"
                         size="small"
+                        type="password"
                         error={passwordErrorState}
-                        value={userDataFormState.password}
+                        /*value={userDataFormState.password}*/
                         onChange={handlePasswordChange}
                         sx={{ m: 2, width: '25ch' }}
                     >
