@@ -2,10 +2,10 @@ import * as React from 'react';
 import { createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Header from './components/Header';
-import SideMenu from './components/SideMenu';
+import Header from '../components/Header';
+import SideMenu from '../components/SideMenu';
 import { Outlet } from 'react-router-dom';
-function AdminDashboard() {
+function UserDashboard() {
     const [mode, setMode] = React.useState('light');
     const defaultTheme = createTheme({ palette: { mode } });
 
@@ -52,4 +52,4 @@ function AdminDashboard() {
     );
 }
 
-export default AdminDashboard;
+export default UserDashboard;

@@ -2,19 +2,8 @@ import React, { createContext, useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { store } from '../app/Store';
 
-const fakeAuth = (isAdmin) =>
-    new Promise((resolve) => {
-        setTimeout(() => resolve({
-            authUser: {
-                userName: "zeynep",
-                userType: isAdmin ? 1 : 2,
-                token: "123123"
-            }
-        }), 250);
-    });
-
 function LoginUser(requestBody) {
-   return fetch('https://localhost:7139/api/Authentication/LoginUser', {
+    return fetch('https://localhost:7139/api/Authentication/LoginUser', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
@@ -22,6 +11,11 @@ function LoginUser(requestBody) {
         .then((res) => {
             return res.json();
         })
+        .catch((error) => {
+            console.log(error)
+            console.log("ERR:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "System Error" };
+        });
 }
 
 const AuthContext = createContext();
@@ -41,6 +35,10 @@ export const AuthProvider = ({ children }) => {
         console.log('response');
         console.log(response);
         localStorage.setItem('authUser', JSON.stringify(response.user));
+        if (response.responseCode != "0") {
+            alert(response.responseDescription);
+            return;
+        }
         console.log("navigate on login");
         if (response.user.userType === 1) {
             console.log("/admin");

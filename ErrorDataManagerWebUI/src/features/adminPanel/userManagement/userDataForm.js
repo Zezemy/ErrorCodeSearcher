@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef} from "react";
 import '../../../../src/App.css';
 import { SearchUserDatas, AddUserDatas, UpdateUserDatas, DeleteUserDatas } from './userDataApi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,11 +22,11 @@ function UserDataForm() {
     const dispatch = useDispatch();
     const selectedRows = useSelector(getSelectedRows);
     let userDataFormState = useSelector(selectState);
+    const passwordRef = createRef();
 
     const [userNameErrorState, setUserNameErrorState] = useState(false);
     const [passwordErrorState, setPasswordErrorState] = useState(false);
     const [userTypeErrorState, setUserTypeErrorState] = useState(false);
-    //const [descriptionErrorState, setDescriptionErrorState] = useState(false);
 
     const handleUserNameChange = (event) => {
         console.log("handleUserNameChange called");
@@ -110,6 +110,7 @@ function UserDataForm() {
             dispatch(setPassword(''));
             dispatch(setUserType(0));
             dispatch(setRowSelection([]));
+            passwordRef.current.value = null;
         }
     }
 
@@ -137,9 +138,7 @@ function UserDataForm() {
                 noValidate
                 autoComplete="off"
             >
-
                 <Box>
-
                     <TextField
                         id="outlined-select-userName"
                         label="UserName"
@@ -158,6 +157,7 @@ function UserDataForm() {
                         type="password"
                         error={passwordErrorState}
                         /*value={userDataFormState.password}*/
+                        inputRef={passwordRef}
                         onChange={handlePasswordChange}
                         sx={{ m: 2, width: '25ch' }}
                     >
@@ -194,8 +194,6 @@ function UserDataForm() {
                     </Button>
                 </Box>
                 <Box>
-
-
                     <Button
                         variant="contained"
                         color="success"

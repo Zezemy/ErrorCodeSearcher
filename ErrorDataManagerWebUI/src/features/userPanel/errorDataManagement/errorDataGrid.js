@@ -4,15 +4,15 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { selectData } from './errorDataApiSearchSlice';
 import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
-import { selectRowSelectionModel, setRowSelection } from '../../app/AppStateSlice';
-import { store } from '../../app/Store';
+import { selectRowSelectionModel, setRowSelection } from '../../../app/AppStateSlice';
+import { store } from '../../../app/Store';
 
 const columns = [
     { field: 'id', headerName: 'Id', width: 90 },
     {
         field: 'code',
         headerName: 'Code',
-        width: 150,
+        width: 120,
         editable: true,
     },
     {
@@ -25,12 +25,12 @@ const columns = [
         field: 'category',
         headerName: 'Category',
         type: 'number',
-        width: 110,
+        width: 90,
         editable: true,
     },
     {
         field: 'deviceClassName',
-        headerName: 'DeviceClassName',
+        headerName: 'Device Class Name',
         type: 'number',
         width: 110,
         editable: true,
@@ -39,33 +39,33 @@ const columns = [
         field: 'tag',
         headerName: 'Tag',
         type: 'number',
-        width: 110,
+        width: 90,
         editable: true,
     },
     {
         field: 'createdBy',
-        headerName: 'CreatedBy',
+        headerName: 'Created By',
         type: 'number',
         width: 110,
         editable: true,
     },
     {
         field: 'createDate',
-        headerName: 'CreateDate',
+        headerName: 'Create Date',
         type: 'number',
         width: 110,
         editable: true,
     },
     {
         field: 'updatedBy',
-        headerName: 'UpdatedBy',
+        headerName: 'Updated By',
         type: 'number',
         width: 110,
         editable: true,
     },
     {
         field: 'updateDate',
-        headerName: 'UpdateDate',
+        headerName: 'Update Date',
         type: 'number',
         width: 110,
         editable: true,
@@ -96,6 +96,7 @@ export default function ErrorDataGrid() {
             console.log(rowSelectionModel);
         }
     };
+
     return (
         <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid

@@ -24,6 +24,7 @@ export function AddErrorDatas(requestBody) {
         })
         .then((data) => {
             console.log(data);
+            alert(data.responseDescription);
         });
 }
 
@@ -38,6 +39,7 @@ export function UpdateErrorDatas(requestBody) {
         })
         .then((data) => {
             console.log(data);
+            alert(data.responseDescription);
         });
 }
 
@@ -52,6 +54,7 @@ export function DeleteErrorDatas(requestBody) {
         })
         .then((data) => {
             console.log(data);
+            alert(data.responseDescription);
         });
 }
 

@@ -10,9 +10,8 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import AtmIcon from '@mui/icons-material/Atm';
 
 const mainListItems = [
-    { text: 'Home', icon: <HomeRoundedIcon />, to: '/admin' },
-    { text: 'User Manager', icon: <PeopleRoundedIcon />, to: 'admin/userDataManager' },
-    { text: 'Error Manager', icon: <AtmIcon />, to: 'admin/errorDataManager' },
+    { text: 'Home', icon: <HomeRoundedIcon />, to: '/' },
+    { text: 'Error Manager', icon: <AtmIcon />, to: 'dashboard/errorDataManager' },
 ];
 
 const secondaryListItems = [];

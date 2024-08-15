@@ -1,7 +1,7 @@
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { searchSlice } from '../features/errorDataForm/errorDataApiSearchSlice';
-import { errorDataSlice } from '../features/errorDataForm/errorDataFormSlice';
+import { searchSlice } from '../features/userPanel/errorDataManagement/errorDataApiSearchSlice';
+import { errorDataSlice } from '../features/userPanel/errorDataManagement/errorDataFormSlice';
 import { userDataSlice } from '../features/adminPanel/userManagement/userDataFormSlice';
 import { AppStateSlice } from './AppStateSlice';
 

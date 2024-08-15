@@ -23,7 +23,35 @@ const columns = [
     },
     {
         field: 'userType',
-        headerName: 'UserType',
+        headerName: 'User Type',
+        type: 'number',
+        width: 90,
+        editable: true,
+    },
+    {
+        field: 'createdBy',
+        headerName: 'Created By',
+        type: 'number',
+        width: 120,
+        editable: true,
+    },
+    {
+        field: 'createDate',
+        headerName: 'Create Date',
+        type: 'number',
+        width: 110,
+        editable: true,
+    },
+    {
+        field: 'updatedBy',
+        headerName: 'Updated By',
+        type: 'number',
+        width: 110,
+        editable: true,
+    },
+    {
+        field: 'updateDate',
+        headerName: 'Update Date',
         type: 'number',
         width: 110,
         editable: true,
@@ -52,6 +80,7 @@ export default function UserDataGrid() {
             console.log(rowSelectionModel);
         }
     };
+
     return (
         <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import '../../App.css';
+import '../../../App.css';
 import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './errorDataApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';
 import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
-import { setRowSelection } from '../../app/AppStateSlice';
-import { store } from '../../app/Store';
+import { setRowSelection } from '../../../app/AppStateSlice';
+import { store } from '../../../app/Store';
 import ErrorDataGrid from './errorDataGrid';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,7 +22,7 @@ import MoveUpIcon from '@mui/icons-material/MoveUp';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
-import Logout from '../../components/Logout'
+import Logout from '../../../components/Logout';
 
 function ErrorDataForm() {
     const dispatch = useDispatch();
@@ -233,38 +233,16 @@ function ErrorDataForm() {
     ];
 
     return (
-        <div id="form" className="form">
-            <header className="form-header">
-            </header>
+        <>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{ display: 'flex' }}
+                    noValidate
+                    autoComplete="off"
+                    sx={{ width: 'auto' }}
+                >
 
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{ display: 'flex' }}
-                noValidate
-                autoComplete="off"
-                sx={{ width: 'auto' }}
-            >
-                <AppBar position="static" color="primary" sx={{ m: 1 }}>
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="default"//inherit
-                            aria-label="menu"
-                            sx={{ mr: 2 }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            ATM Error Data Manager
-                        </Typography>
-
-                        <Logout />
-
-                    </Toolbar>
-                </AppBar>
-                <div>
                     <TextField
                         id="outlined-basic-errorCode"
                         label="Error Code"
@@ -397,23 +375,22 @@ function ErrorDataForm() {
                         Reset
                     </Button>
 
-                    <Button
-                        variant="outlined"
-                        color="inherit"
-                        type="submit"
-                        name="bulkInsert"
-                        value="Bulk Insert"
-                        sx={{ m: 1 }}
-                        startIcon={<FileUploadIcon />}
-                    >
-                        Bulk Insert
-                    </Button>
+                    {/*<Button*/}
+                    {/*    variant="outlined"*/}
+                    {/*    color="inherit"*/}
+                    {/*    type="submit"*/}
+                    {/*    name="bulkInsert"*/}
+                    {/*    value="Bulk Insert"*/}
+                    {/*    sx={{ m: 1 }}*/}
+                    {/*    startIcon={<FileUploadIcon />}*/}
+                    {/*>*/}
+                    {/*    Bulk Insert*/}
+                    {/*</Button>*/}
+                </Box >
+                <div class="container">
+                    <ErrorDataGrid />
                 </div>
-            </Box >
-            <div class="container">
-                <ErrorDataGrid />
-            </div>
-        </div >
+        </>
     );
 }
 export default ErrorDataForm;

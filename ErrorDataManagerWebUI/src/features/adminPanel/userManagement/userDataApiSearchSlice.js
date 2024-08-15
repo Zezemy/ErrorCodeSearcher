@@ -21,6 +21,22 @@ const initialState = {
             name: 'UserType',
             selector: row => row.category,
         },
+        {
+            name: 'CreatedBy',
+            selector: row => row.createdBy,
+        },
+        {
+            name: 'CreateDate',
+            selector: row => row.createDate,
+        },
+        {
+            name: 'UpdatedBy',
+            selector: row => row.updatedBy,
+        },
+        {
+            name: 'UpdateDate',
+            selector: row => row.updateDate,
+        }
     ],
     selectedRows: [],
 }

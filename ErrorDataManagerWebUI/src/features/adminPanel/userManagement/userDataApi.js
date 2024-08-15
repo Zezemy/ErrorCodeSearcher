@@ -20,6 +20,7 @@ export function AddUserDatas(requestBody) {
         })
         .then((data) => {
             console.log(data);
+            alert(data.responseDescription);
         });
 }
 
@@ -34,6 +35,7 @@ export function UpdateUserDatas(requestBody) {
         })
         .then((data) => {
             console.log(data);
+            alert(data.responseDescription);
         });
 }
 
@@ -48,5 +50,6 @@ export function DeleteUserDatas(requestBody) {
         })
         .then((data) => {
             console.log(data);
+            alert(data.responseDescription);
         });
 }

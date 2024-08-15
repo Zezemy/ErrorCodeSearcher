@@ -1,6 +1,6 @@
 import React from 'react';
 import ErrorDataForm from './errorDataForm';
-import '../../App.css';
+import '../../../App.css';
 
 function ErrorDataManager() {
     return (

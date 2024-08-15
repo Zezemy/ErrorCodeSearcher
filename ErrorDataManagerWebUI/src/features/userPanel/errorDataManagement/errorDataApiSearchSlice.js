@@ -1,4 +1,4 @@
-import { CreateAppSlice } from '../../app/CreateAppSlice';
+import { CreateAppSlice } from '../../../app/CreateAppSlice';
 import { SearchErrorDatas } from './errorDataApi';
 
 const initialState = {
