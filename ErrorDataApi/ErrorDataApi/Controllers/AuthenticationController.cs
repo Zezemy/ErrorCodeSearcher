@@ -21,7 +21,7 @@ namespace ErrorDataApi.Controllers
 
 
         [HttpPost]
-        public async Task<BaseResponse> LoginUserAsync([FromBody] AuthLoginUserRequest req)
+        public async Task<BaseResponse> LoginUserAsync([FromBody] LoginUserRequest req)
         {
             IQueryable<User> result = _context.Users;
             if (req == null || AreFieldsEmpty(req))
@@ -48,13 +48,13 @@ namespace ErrorDataApi.Controllers
             authUser.UpdatedBy = userInDb.UpdatedBy;
             authUser.UpdateDate = userInDb.UpdateDate;
 
-            var ret = new AuthLoginUserResult();
+            var ret = new LoginUserResult();
             ret.User = authUser;
 
             return ret;
         }
 
-        private bool AreFieldsEmpty(AuthLoginUserRequest request)
+        private bool AreFieldsEmpty(LoginUserRequest request)
         {
             var isUserNameEmpty = string.IsNullOrWhiteSpace(request.UserName);
             var isPasswordEmpty = string.IsNullOrWhiteSpace(request.Password);

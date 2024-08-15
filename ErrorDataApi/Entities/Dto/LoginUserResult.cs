@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Dto
 {
-    public class AuthLoginUserResult : BaseResponse
+    public class LoginUserResult : BaseResponse
     {
         public AuthenticatedUser User { get; set; }
     }

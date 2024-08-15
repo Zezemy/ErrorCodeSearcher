@@ -3,6 +3,8 @@ using Entities.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using static Entities.Dto.Enums;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace ErrorDataApi.Controllers
 {
@@ -156,63 +158,96 @@ namespace ErrorDataApi.Controllers
         [HttpPost(Name = "AddAsync")]
         public async Task<BaseResponse> AddAsync([FromBody] ErrorDataRequest req)
         {
-            if (req.ErrorDataArray.Any(x => AnyFieldsEmpty(x)))
+            try
             {
-                return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                if (req.ErrorDataArray.Any(x => AnyFieldsEmpty(x)))
+                {
+                    return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                }
+                _context.ErrorDatas.AddRange(req.ErrorDataArray);
+                _context.SaveChanges();
+                return ReturnResponseMessage("0", "İşlem başarılı.");
             }
-            _context.ErrorDatas.AddRange(req.ErrorDataArray);
-            _context.SaveChanges();
-            return ReturnResponseMessage("0", "İşlem başarılı.");
+            catch (DbUpdateException ex)
+            {
+                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+            }
+            catch (Exception e)
+            {
+                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+            }
         }
 
 
         [HttpPut(Name = "UpdateAsync")]
         public async Task<BaseResponse> UpdateAsync([FromBody] ErrorDataRequest req)
         {
-            foreach (var errorDataFromRequest in req.ErrorDataArray)
+            try
             {
-                var errorData = _context.ErrorDatas.Where(x => x.Id == errorDataFromRequest.Id).FirstOrDefault();
-                if (errorData == null)
+                foreach (var errorDataFromRequest in req.ErrorDataArray)
                 {
-                    return ReturnResponseMessage("2", $"{errorData?.Code} kodlu hata tanımı bulunamadı.");
+                    var errorData = _context.ErrorDatas.Where(x => x.Id == errorDataFromRequest.Id).FirstOrDefault();
+                    if (errorData == null)
+                    {
+                        return ReturnResponseMessage("2", $"{errorData?.Code} kodlu hata tanımı bulunamadı.");
+                    }
+                    if (AnyFieldsEmpty(errorData))
+                    {
+                        return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                    }
+                    var supportedDevices = Enum.GetNames<DeviceClasses>().ToList();
+                    supportedDevices.Add("XFSGeneral");
+                    if (supportedDevices.Contains(errorDataFromRequest.DeviceClassName))
+                    {
+                        errorData.Description = errorDataFromRequest.Description;
+                        errorData.Code = errorDataFromRequest.Code;
+                        errorData.Category = errorDataFromRequest.Category;
+                        errorData.DeviceClassName = errorDataFromRequest.DeviceClassName;
+                        errorData.Tag = errorDataFromRequest.Tag;
+                    }
+                    else
+                        return ReturnResponseMessage("3", "İşlem başarısız. Desteklenmeyen cihaz tipi.");
                 }
-                if (AnyFieldsEmpty(errorData))
-                {
-                    return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
-                }
-                var supportedDevices = Enum.GetNames<DeviceClasses>().ToList();
-                supportedDevices.Add("XFSGeneral");
-                if (supportedDevices.Contains(errorDataFromRequest.DeviceClassName))
-                {
-                    errorData.Description = errorDataFromRequest.Description;
-                    errorData.Code = errorDataFromRequest.Code;
-                    errorData.Category = errorDataFromRequest.Category;
-                    errorData.DeviceClassName = errorDataFromRequest.DeviceClassName;
-                    errorData.Tag = errorDataFromRequest.Tag;
-                }
-                else
-                    return ReturnResponseMessage("3", "İşlem başarısız. Desteklenmeyen cihaz tipi.");
+                _context.SaveChanges();
+                return ReturnResponseMessage("0", "İşlem başarılı.");
             }
-            _context.SaveChanges();
-            return ReturnResponseMessage("0", "İşlem başarılı.");
+            catch (DbUpdateException ex)
+            {
+                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+            }
+            catch (Exception e)
+            {
+                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+            }
         }
 
 
         [HttpDelete(Name = "DeleteAsync")]
         public async Task<BaseResponse> DeleteAsync(long id)
         {
-            var errorData = _context.ErrorDatas.Where(x => x.Id == id).FirstOrDefault();
-            if (errorData == null)
+            try
             {
-                return new ErrorDataResponse()
+                var errorData = _context.ErrorDatas.Where(x => x.Id == id).FirstOrDefault();
+                if (errorData == null)
                 {
-                    ResponseCode = "1",
-                    ResponseDescription = $"{id} numaralı tanım bulunamadı."
-                };
+                    return new ErrorDataResponse()
+                    {
+                        ResponseCode = "1",
+                        ResponseDescription = $"{id} numaralı tanım bulunamadı."
+                    };
+                }
+                _context.ErrorDatas.Remove(errorData);
+                _context.SaveChanges();
+                return ReturnResponseMessage("0", "İşlem başarılı.");
             }
-            _context.ErrorDatas.Remove(errorData);
-            _context.SaveChanges();
-            return ReturnResponseMessage("0", "İşlem başarılı.");
+            catch (DbUpdateException ex)
+            {
+                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+            }
+            catch (Exception e)
+            {
+                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+            }
         }
 
         private bool AreFieldsEmpty(ErrorData data)

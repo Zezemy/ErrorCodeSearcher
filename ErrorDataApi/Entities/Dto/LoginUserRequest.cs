@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Dto
 {
-    public class AuthLoginUserRequest : BaseRequest
+    public class LoginUserRequest : BaseRequest
     {
         public string UserName { get; set; }
         public string Password { get; set; }

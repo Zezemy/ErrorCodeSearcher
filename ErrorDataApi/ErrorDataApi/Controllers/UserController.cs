@@ -2,6 +2,7 @@
 using Entities.Dto;
 using ErrorDataApi.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ErrorDataApi.Controllers
@@ -153,13 +154,24 @@ namespace ErrorDataApi.Controllers
         [HttpPost]
         public async Task<BaseResponse> AddUserAsync([FromBody] UserDataRequest req)
         {
-            if (req.UserDataArray.Any(x => AnyFieldsEmpty(x)))
+            try
             {
-                return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                if (req.UserDataArray.Any(x => AnyFieldsEmpty(x)))
+                {
+                    return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                }
+                _context.Users.AddRange(req.UserDataArray);
+                _context.SaveChanges();
+                return ReturnResponseMessage("0", "İşlem başarılı.");
             }
-            _context.Users.AddRange(req.UserDataArray);
-            _context.SaveChanges();
-            return ReturnResponseMessage("0", "İşlem başarılı.");
+            catch (DbUpdateException ex)
+            {
+                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+            }
+            catch (Exception e)
+            {
+                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+            }
         }
         private bool AnyFieldsEmpty(User data)
         {
@@ -173,21 +185,32 @@ namespace ErrorDataApi.Controllers
         [HttpPut]
         public async Task<BaseResponse> UpdateUserAsync([FromBody] UserDataRequest req)
         {
-            foreach (var userDataFromRequest in req.UserDataArray)
+            try
             {
-                var userData = _context.Users.Where(x => x.Id == userDataFromRequest.Id).FirstOrDefault();
-                var response = new BaseResponse();
-                var isValid = ValidateUpdateUserData(userData, response);
-                if (!isValid)
+                foreach (var userDataFromRequest in req.UserDataArray)
                 {
-                    return response;
+                    var userData = _context.Users.Where(x => x.Id == userDataFromRequest.Id).FirstOrDefault();
+                    var response = new BaseResponse();
+                    var isValid = ValidateUpdateUserData(userData, response);
+                    if (!isValid)
+                    {
+                        return response;
+                    }
+                    userData.UserName = userDataFromRequest.UserName;
+                    userData.Password = userDataFromRequest.Password;
+                    userData.UserType = userDataFromRequest.UserType;
                 }
-                userData.UserName = userDataFromRequest.UserName;
-                userData.Password = userDataFromRequest.Password;
-                userData.UserType = userDataFromRequest.UserType;
+                _context.SaveChanges();
+                return ReturnResponseMessage("0", "İşlem başarılı.");
             }
-            _context.SaveChanges();
-            return ReturnResponseMessage("0", "İşlem başarılı.");
+            catch (DbUpdateException ex)
+            {
+                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+            }
+            catch (Exception e)
+            {
+                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+            }
         }
 
         private bool ValidateUpdateUserData(User? userData, BaseResponse response)
@@ -209,18 +232,29 @@ namespace ErrorDataApi.Controllers
         [HttpDelete]
         public async Task<BaseResponse> DeleteUserAsync(long id)
         {
-            var userData = _context.Users.Where(x => x.Id == id).FirstOrDefault();
-            if (userData == null)
+            try
             {
-                return new UserDataResponse()
+                var userData = _context.Users.Where(x => x.Id == id).FirstOrDefault();
+                if (userData == null)
                 {
-                    ResponseCode = "1",
-                    ResponseDescription = $"{id} numaralı kullanıcı bulunamadı."
-                };
+                    return new UserDataResponse()
+                    {
+                        ResponseCode = "1",
+                        ResponseDescription = $"{id} numaralı kullanıcı bulunamadı."
+                    };
+                }
+                _context.Users.Remove(userData);
+                _context.SaveChanges();
+                return ReturnResponseMessage("0", "İşlem başarılı.");
             }
-            _context.Users.Remove(userData);
-            _context.SaveChanges();
-            return ReturnResponseMessage("0", "İşlem başarılı.");
+            catch (DbUpdateException ex)
+            {
+                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+            }
+            catch (Exception e)
+            {
+                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+            }
         }
     }
 }
