@@ -10,8 +10,8 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import AtmIcon from '@mui/icons-material/Atm';
 
 const mainListItems = [
-    { text: 'Home', icon: <HomeRoundedIcon />, to: '/' },
-    { text: 'Error Manager', icon: <AtmIcon />, to: 'dashboard/errorDataManager' },
+/*    { text: 'Home', icon: <HomeRoundedIcon />, to: '/dashboard' },*/
+    { text: 'Error Manager', icon: <AtmIcon />, to: '/dashboard/errorDataManager' }, //absolute path
 ];
 
 const secondaryListItems = [];
@@ -22,7 +22,7 @@ export default function MenuContent() {
             <List dense>
                 {mainListItems.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton selected={index === 0} to={item.to}>
+                        <ListItemButton selected={index === 0} href={item.to}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text} />
                         </ListItemButton>

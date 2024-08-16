@@ -1,1 +1,17 @@
+.halfOpacity {
+    opacity: 0.1;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.top0 {
+    display: block;
+    position:fixed;
+    bottom:0;
+    right:0;
+    margin-left: auto;
+    margin-right: auto;
+}

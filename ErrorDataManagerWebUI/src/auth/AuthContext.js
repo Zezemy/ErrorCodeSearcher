@@ -13,8 +13,8 @@ function LoginUser(requestBody) {
         })
         .catch((error) => {
             console.log(error)
-            console.log("ERR:", error, error.name, error.message)
-            return { responseCode: "-1", responseDescription: "System Error" };
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
         });
 }
 

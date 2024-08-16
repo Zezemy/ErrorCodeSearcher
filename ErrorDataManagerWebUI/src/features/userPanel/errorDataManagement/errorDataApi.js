@@ -11,6 +11,11 @@ export function SearchErrorDatas(requestBody) {
         .then((res) => {
             return res.json();
         })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
+        });
 }
 
 export function AddErrorDatas(requestBody) {
@@ -25,6 +30,11 @@ export function AddErrorDatas(requestBody) {
         .then((data) => {
             console.log(data);
             alert(data.responseDescription);
+        })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
         });
 }
 
@@ -40,6 +50,11 @@ export function UpdateErrorDatas(requestBody) {
         .then((data) => {
             console.log(data);
             alert(data.responseDescription);
+        })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
         });
 }
 
@@ -55,6 +70,11 @@ export function DeleteErrorDatas(requestBody) {
         .then((data) => {
             console.log(data);
             alert(data.responseDescription);
+        })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
         });
 }
 

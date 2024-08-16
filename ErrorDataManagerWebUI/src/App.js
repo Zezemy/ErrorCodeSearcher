@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import Login from '../src/features/login/Login';
 import UserDataManager from './features/adminPanel/userManagement/UserDataManager';
 import UserDashboard from './features/userPanel/errorDataManagement/UserDashboard';
+import LandingPage from './features/LandingPage';
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
                         </ProtectedRoute>
                     }
                 >
+                    <Route index element={<LandingPage />} />
                     <Route
                         path="errorDataManager"
                         element={
@@ -40,6 +42,7 @@ const App = () => {
                         </AdminRoute>
                     }
                 >
+                    <Route index element={<LandingPage />} />
                     <Route
                         path="userDataManager"
                         element={

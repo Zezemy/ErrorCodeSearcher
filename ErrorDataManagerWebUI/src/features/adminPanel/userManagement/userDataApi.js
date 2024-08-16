@@ -7,6 +7,11 @@ export function SearchUserDatas(requestBody) {
         .then((res) => {
             return res.json();
         })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
+        });
 }
 
 export function AddUserDatas(requestBody) {
@@ -21,6 +26,11 @@ export function AddUserDatas(requestBody) {
         .then((data) => {
             console.log(data);
             alert(data.responseDescription);
+        })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
         });
 }
 
@@ -36,6 +46,11 @@ export function UpdateUserDatas(requestBody) {
         .then((data) => {
             console.log(data);
             alert(data.responseDescription);
+        })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
         });
 }
 
@@ -51,5 +66,10 @@ export function DeleteUserDatas(requestBody) {
         .then((data) => {
             console.log(data);
             alert(data.responseDescription);
+        })
+        .catch((error) => {
+            console.log(error)
+            console.log("err:", error, error.name, error.message)
+            return { responseCode: "-1", responseDescription: "system error" };
         });
 }
