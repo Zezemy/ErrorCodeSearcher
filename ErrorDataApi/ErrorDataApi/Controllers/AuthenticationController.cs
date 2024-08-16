@@ -50,6 +50,8 @@ namespace ErrorDataApi.Controllers
 
             var ret = new LoginUserResult();
             ret.User = authUser;
+            ret.ResponseCode = "0";
+            ret.ResponseDescription = "İşlem başarılı.";
 
             return ret;
         }
