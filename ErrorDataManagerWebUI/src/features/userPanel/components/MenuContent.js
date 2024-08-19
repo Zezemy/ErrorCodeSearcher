@@ -14,8 +14,6 @@ const mainListItems = [
     { text: 'Error Manager', icon: <AtmIcon />, to: '/dashboard/errorDataManager' }, //absolute path
 ];
 
-const secondaryListItems = [];
-
 export default function MenuContent() {
     return (
         <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
@@ -23,17 +21,6 @@ export default function MenuContent() {
                 {mainListItems.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{ display: 'block' }}>
                         <ListItemButton selected={index === 0} href={item.to}>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-
-            <List dense>
-                {secondaryListItems.map((item, index) => (
-                    <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text} />
                         </ListItemButton>

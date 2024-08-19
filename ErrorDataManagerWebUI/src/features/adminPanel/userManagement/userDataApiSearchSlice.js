@@ -4,51 +4,12 @@ import { SearchUserDatas } from './userDataApi';
 const initialState = {
     value: [],
     status: "idle",
-    columns: [
-        {
-            name: 'Id',
-            selector: row => row.id,
-        },
-        {
-            name: 'UserName',
-            selector: row => row.code,
-        },
-        {
-            name: 'Password',
-            selector: row => row.description,
-        },
-        {
-            name: 'UserType',
-            selector: row => row.category,
-        },
-        {
-            name: 'CreatedBy',
-            selector: row => row.createdBy,
-        },
-        {
-            name: 'CreateDate',
-            selector: row => row.createDate,
-        },
-        {
-            name: 'UpdatedBy',
-            selector: row => row.updatedBy,
-        },
-        {
-            name: 'UpdateDate',
-            selector: row => row.updateDate,
-        }
-    ],
-    selectedRows: [],
 }
 
 export const searchSlice = CreateAppSlice({
     name: "search",
     initialState,
     reducers: create => ({
-        setSelectedRows: (state, action) => {
-            state.selectedRows = action.payload
-        },
-
         searchAsync: create.asyncThunk(
             async payload => {
                 const response = await SearchUserDatas(payload)
@@ -73,10 +34,8 @@ export const searchSlice = CreateAppSlice({
     selectors: {
         selectData: state => state.value,
         selectStatus: state => state.status,
-        selectColumns: state => state.columns,
-        getSelectedRows: state => state.selectedRows,
     },
 })
 
-export const { searchAsync, setSelectedRows } = searchSlice.actions;
-export const { selectData, selectStatus, selectColumns, getSelectedRows } = searchSlice.selectors;
+export const { searchAsync } = searchSlice.actions;
+export const { selectData, selectStatus } = searchSlice.selectors;

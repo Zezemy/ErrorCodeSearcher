@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { selectData } from './errorDataApiSearchSlice';
+import { selectData, selectStatus } from './errorDataApiSearchSlice';
 import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
 import { selectRowSelectionModel, setRowSelection } from '../../../app/AppStateSlice';
 import { store } from '../../../app/Store';
@@ -75,6 +75,7 @@ const columns = [
 export default function ErrorDataGrid() {
     const dispatch = useDispatch();
     const storedData = useSelector(selectData);
+    const loadStatus = useSelector(selectStatus);
     var rowSelectionModel = useSelector(selectRowSelectionModel);
 
     const setRowSelectionModel = (selectedRowList) => {
@@ -96,6 +97,13 @@ export default function ErrorDataGrid() {
             console.log(rowSelectionModel);
         }
     };
+
+    if (loadStatus == "loading") {
+        return (<>
+            <div>Loading</div>
+        </>
+        );
+    }
 
     return (
         <Box sx={{ height: 400, width: '100%' }}>

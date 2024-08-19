@@ -62,9 +62,6 @@ export default function SideMenu() {
                     <Typography variant="body2" sx={{ fontWeight: 500, lineHeight: '16px' }}>
                         {authUser.userName}
                     </Typography>
-                    {/*<Typography variant="caption" sx={{ color: 'text.secondary' }}>*/}
-                    {/*  riley@email.com*/}
-                    {/*</Typography>*/}
                 </Box>
             </Stack>
         </Drawer>

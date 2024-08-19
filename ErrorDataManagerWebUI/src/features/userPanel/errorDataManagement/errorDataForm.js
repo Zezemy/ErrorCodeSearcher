@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../../../App.css';
 import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './errorDataApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchAsync, getSelectedRows } from './errorDataApiSearchSlice';
+import { searchAsync } from './errorDataApiSearchSlice';
 import { setId, setCategory, setDeviceClassName, setErrorCode, setDescription, setTag, selectState } from './errorDataFormSlice';
 import { setRowSelection } from '../../../app/AppStateSlice';
 import { store } from '../../../app/Store';
@@ -22,11 +22,9 @@ import MoveUpIcon from '@mui/icons-material/MoveUp';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
-import Logout from '../../../components/Logout';
 
 function ErrorDataForm() {
     const dispatch = useDispatch();
-    const selectedRows = useSelector(getSelectedRows);
     let errorDataFormState = useSelector(selectState);
 
     const [categoryErrorState, setCategoryErrorState] = useState(false);

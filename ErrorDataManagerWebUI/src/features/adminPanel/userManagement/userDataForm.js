@@ -2,7 +2,7 @@ import React, { useEffect, useState, createRef} from "react";
 import '../../../../src/App.css';
 import { SearchUserDatas, AddUserDatas, UpdateUserDatas, DeleteUserDatas } from './userDataApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchAsync, getSelectedRows } from './userDataApiSearchSlice';
+import { searchAsync } from './userDataApiSearchSlice';
 import { setId, setUserName, setPassword, setUserType, selectState } from './userDataFormSlice';
 import { setRowSelection } from '../../../app/AppStateSlice';
 import { store } from '../../../app/Store';
@@ -20,7 +20,6 @@ import sha256 from 'crypto-js/sha256';
 
 function UserDataForm() {
     const dispatch = useDispatch();
-    const selectedRows = useSelector(getSelectedRows);
     let userDataFormState = useSelector(selectState);
     const passwordRef = createRef();
 
