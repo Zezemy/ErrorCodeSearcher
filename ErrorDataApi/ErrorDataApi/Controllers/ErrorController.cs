@@ -56,6 +56,7 @@ namespace ErrorDataApi.Controllers
         [HttpPost(Name = "SearchErrors")]
         public async Task<SearchResult> SearchAsync([FromBody] SearchErrorRequest req)
         {
+            //Thread.Sleep(5000);
             IQueryable<ErrorData> result = _context.ErrorDatas;
             if (req.ErrorDataList == null || !req.ErrorDataList.Any() || (req.ErrorDataList.Count == 1 && AreFieldsEmpty(req.ErrorDataList[0])))
             {
