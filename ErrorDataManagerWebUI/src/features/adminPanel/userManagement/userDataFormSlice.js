@@ -30,8 +30,8 @@ export const userDataSlice = CreateAppSlice({
     }),
 
     selectors: {
-        selectState: state => state.userData
+        selectUserData: state => state.userData
     },
 })
 export const { setId, setUserName, setPassword, setUserType } = userDataSlice.actions;
-export const { selectState } = userDataSlice.selectors;
+export const { selectUserData } = userDataSlice.selectors;

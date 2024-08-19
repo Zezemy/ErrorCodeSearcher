@@ -3,7 +3,7 @@ import '../../../../src/App.css';
 import { SearchUserDatas, AddUserDatas, UpdateUserDatas, DeleteUserDatas } from './userDataApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAsync } from './userDataApiSearchSlice';
-import { setId, setUserName, setPassword, setUserType, selectState } from './userDataFormSlice';
+import { setId, setUserName, setPassword, setUserType, selectUserData } from './userDataFormSlice';
 import { setRowSelection } from '../../../app/AppStateSlice';
 import { store } from '../../../app/Store';
 import UserDataGrid from './userDataGrid';
@@ -20,7 +20,7 @@ import sha256 from 'crypto-js/sha256';
 
 function UserDataForm() {
     const dispatch = useDispatch();
-    let userDataFormState = useSelector(selectState);
+    let userDataFormState = useSelector(selectUserData);
     const passwordRef = createRef();
 
     const [userNameErrorState, setUserNameErrorState] = useState(false);
