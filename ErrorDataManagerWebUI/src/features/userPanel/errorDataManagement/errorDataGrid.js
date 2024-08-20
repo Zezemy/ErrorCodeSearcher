@@ -82,7 +82,7 @@ export default function ErrorDataGrid() {
         console.log("setRowSelectionModel selectedRowList");
         console.log(selectedRowList);
         if (selectedRowList.length == 1) {
-        let selectedRows = storedData.filter(x => x.id == selectedRowList[0]);
+            let selectedRows = storedData.filter(x => x.id == selectedRowList[0]);
             let selected = selectedRows[0];
             console.log("selected");
             console.log(selected);
@@ -96,7 +96,20 @@ export default function ErrorDataGrid() {
             console.log("rowSelectionModel");
             console.log(rowSelectionModel);
         }
+        else {
+            ResetState();
+        }
     };
+
+    function ResetState() {
+        dispatch(setId(0));
+        dispatch(setCategory(''));
+        dispatch(setDeviceClassName(''));
+        dispatch(setErrorCode(''));
+        dispatch(setDescription(''));
+        dispatch(setTag(''));
+        dispatch(setRowSelection([]));
+    }
 
     if (loadStatus == "loading") {
         return (<>

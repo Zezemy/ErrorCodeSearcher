@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createRef} from "react";
+﻿import React, { useEffect, useState, createRef } from "react";
 import '../../../../src/App.css';
 import { SearchUserDatas, AddUserDatas, UpdateUserDatas, DeleteUserDatas } from './userDataApi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -86,30 +86,38 @@ function UserDataForm() {
                     "userType": userDataFormState.userType
                 }]
             });
+            ResetState();
         }
 
         else if (event.nativeEvent.submitter.name == "update") {
-            UpdateUserDatas({
-                "userDataArray": [{
-                    "id": userDataFormState.id,
-                    "userName": userDataFormState.userName,
-                    "password": userDataFormState.password,
-                    "userType": userDataFormState.userType
-                }]
-            });
+            if (userDataFormState.id == 0) {
+                alert("Lütfen önce seçim yapınız, daha sonra güncelleyiniz.");
+            }
+            else {
+                UpdateUserDatas({
+                    "userDataArray": [{
+                        "id": userDataFormState.id,
+                        "userName": userDataFormState.userName,
+                        "password": userDataFormState.password,
+                        "userType": userDataFormState.userType
+                    }]
+                });
+                ResetState();
+            }
         }
 
         else if (event.nativeEvent.submitter.name == "delete") {
-            DeleteUserDatas({ "id": userDataFormState.id });
+            if (userDataFormState.id == 0) {
+                alert("Lütfen önce seçim yapınız, daha sonra siliniz.");
+            }
+            else {
+                DeleteUserDatas({ "id": userDataFormState.id });
+                ResetState();
+            }
         }
 
         else if (event.nativeEvent.submitter.name == "reset") {
-            dispatch(setId(0));
-            dispatch(setUserName(''));
-            dispatch(setPassword(''));
-            dispatch(setUserType(0));
-            dispatch(setRowSelection([]));
-            passwordRef.current.value = null;
+            ResetState();
         }
     }
 
@@ -246,5 +254,14 @@ function UserDataForm() {
         </>
 
     );
+
+    function ResetState() {
+        dispatch(setId(0));
+        dispatch(setUserName(''));
+        dispatch(setPassword(''));
+        dispatch(setUserType(0));
+        dispatch(setRowSelection([]));
+        passwordRef.current.value = null;
+    }
 }
 export default UserDataForm;

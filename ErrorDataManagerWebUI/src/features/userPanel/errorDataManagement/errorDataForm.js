@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import '../../../App.css';
 import { SearchErrorDatas, AddErrorDatas, UpdateErrorDatas, DeleteErrorDatas } from './errorDataApi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -106,33 +106,40 @@ function ErrorDataForm() {
                     "tag": errorDataFormState.tag
                 }]
             });
+            ResetState();
         }
 
         else if (event.nativeEvent.submitter.name == "update") {
-            UpdateErrorDatas({
-                "errorDataArray": [{
-                    "id": errorDataFormState.id,
-                    "category": errorDataFormState.category,
-                    "deviceClassName": errorDataFormState.deviceClassName,
-                    "code": errorDataFormState.code,
-                    "description": errorDataFormState.description,
-                    "tag": errorDataFormState.tag
-                }]
-            });
+            if (errorDataFormState.id == 0) {
+                alert("Lütfen önce seçim yapınız, daha sonra güncelleyiniz.");
+            }
+            else {
+                UpdateErrorDatas({
+                    "errorDataArray": [{
+                        "id": errorDataFormState.id,
+                        "category": errorDataFormState.category,
+                        "deviceClassName": errorDataFormState.deviceClassName,
+                        "code": errorDataFormState.code,
+                        "description": errorDataFormState.description,
+                        "tag": errorDataFormState.tag
+                    }]
+                });
+                ResetState();
+            }
         }
 
         else if (event.nativeEvent.submitter.name == "delete") {
-            DeleteErrorDatas({ "id": errorDataFormState.id });
+            if (errorDataFormState.id == 0) {
+                alert("Lütfen önce seçim yapınız, daha sonra siliniz.");
+            }
+            else {
+                DeleteErrorDatas({ "id": errorDataFormState.id });
+                ResetState(); 
+            }
         }
 
         else if (event.nativeEvent.submitter.name == "reset") {
-            dispatch(setId(0));
-            dispatch(setCategory(''));
-            dispatch(setDeviceClassName(''));
-            dispatch(setErrorCode(''));
-            dispatch(setDescription(''));
-            dispatch(setTag(''));
-            dispatch(setRowSelection([]));
+            ResetState();
         }
     }
 
@@ -232,163 +239,173 @@ function ErrorDataForm() {
 
     return (
         <>
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    sx={{ display: 'flex' }}
-                    noValidate
-                    autoComplete="off"
-                    sx={{ width: 'auto' }}
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{ display: 'flex' }}
+                noValidate
+                autoComplete="off"
+                sx={{ width: 'auto' }}
+            >
+
+                <TextField
+                    id="outlined-basic-errorCode"
+                    label="Error Code"
+                    variant="outlined"
+                    size="small"
+                    error={codeErrorState}
+                    value={errorDataFormState.code}
+                    onChange={(e) => dispatch(setErrorCode(e.target.value))}
+                    sx={{ m: 1, width: '25ch' }}
                 >
+                </TextField>
 
-                    <TextField
-                        id="outlined-basic-errorCode"
-                        label="Error Code"
-                        variant="outlined"
-                        size="small"
-                        error={codeErrorState}
-                        value={errorDataFormState.code}
-                        onChange={(e) => dispatch(setErrorCode(e.target.value))}
-                        sx={{ m: 1, width: '25ch' }}
-                    >
-                    </TextField>
+                <TextField
+                    id="outlined-select-category"
+                    select
+                    label="Category"
+                    defaultValue={errorDataFormState.category}
+                    size="small"
+                    error={categoryErrorState}
+                    value={errorDataFormState.category}
+                    onChange={handleCategoryChange}
+                    sx={{ m: 1, width: '25ch' }}
+                >
+                    {categories.map((option) => (
+                        <MenuItem key={option.value} value={option.value} sx={{ fontSize: 12 }}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
 
-                    <TextField
-                        id="outlined-select-category"
-                        select
-                        label="Category"
-                        defaultValue={errorDataFormState.category}
-                        size="small"
-                        error={categoryErrorState}
-                        value={errorDataFormState.category}
-                        onChange={handleCategoryChange}
-                        sx={{ m: 1, width: '25ch' }}
-                    >
-                        {categories.map((option) => (
-                            <MenuItem key={option.value} value={option.value} sx={{ fontSize: 12 }}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+                <TextField
+                    id="outlined-select-deviceClassName"
+                    select
+                    label="Device Class"
+                    defaultValue=""
+                    size="small"
+                    error={deviceClassNameErrorState}
+                    value={errorDataFormState.deviceClassName}
+                    onChange={handleDeviceClassNameChange}
+                    sx={{ m: 1, width: '25ch' }}
+                >
+                    {deviceClassNames.map((option) => (
+                        <MenuItem key={option.value} value={option.value} sx={{ fontSize: 12 }}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
 
-                    <TextField
-                        id="outlined-select-deviceClassName"
-                        select
-                        label="Device Class"
-                        defaultValue=""
-                        size="small"
-                        error={deviceClassNameErrorState}
-                        value={errorDataFormState.deviceClassName}
-                        onChange={handleDeviceClassNameChange}
-                        sx={{ m: 1, width: '25ch' }}
-                    >
-                        {deviceClassNames.map((option) => (
-                            <MenuItem key={option.value} value={option.value} sx={{ fontSize: 12 }}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+                <TextField
+                    id="outlined-basic-tag"
+                    label="Tag"
+                    variant="outlined"
+                    size="small"
+                    value={errorDataFormState.tag}
+                    onChange={(e) => dispatch(setTag(e.target.value))}
+                    sx={{ m: 1, width: '25ch' }}
+                >
+                </TextField>
 
-                    <TextField
-                        id="outlined-basic-tag"
-                        label="Tag"
-                        variant="outlined"
-                        size="small"
-                        value={errorDataFormState.tag}
-                        onChange={(e) => dispatch(setTag(e.target.value))}
-                        sx={{ m: 1, width: '25ch' }}
-                    >
-                    </TextField>
+                <TextField
+                    id="outlined-multiline-static-description"
+                    label="Description"
+                    fullWidth
+                    multiline
+                    rows={3}
+                    defaultValue=""
+                    error={descriptionErrorState}
+                    value={errorDataFormState.description}
+                    onChange={(e) => dispatch(setDescription(e.target.value))}
+                    sx={{ m: 1 }}
+                >
+                </TextField>
 
-                    <TextField
-                        id="outlined-multiline-static-description"
-                        label="Description"
-                        fullWidth
-                        multiline
-                        rows={3}
-                        defaultValue=""
-                        error={descriptionErrorState}
-                        value={errorDataFormState.description}
-                        onChange={(e) => dispatch(setDescription(e.target.value))}
-                        sx={{ m: 1 }}
-                    >
-                    </TextField>
+                <Button
+                    variant="outlined"
+                    color="info"//secondary, info
+                    type="submit"
+                    name="search"
+                    value="Search"
+                    sx={{ m: 1 }}
+                    startIcon={<SearchIcon />}
+                >
+                    Search
+                </Button>
 
-                    <Button
-                        variant="outlined"
-                        color="info"//secondary, info
-                        type="submit"
-                        name="search"
-                        value="Search"
-                        sx={{ m: 1 }}
-                        startIcon={<SearchIcon />}
-                    >
-                        Search
-                    </Button>
+                <Button
+                    variant="contained"
+                    color="success"
+                    type="submit"
+                    name="add"
+                    value="Add"
+                    sx={{ m: 1 }}
+                    startIcon={<AddIcon />}
+                >
+                    Add
+                </Button>
 
-                    <Button
-                        variant="contained"
-                        color="success"
-                        type="submit"
-                        name="add"
-                        value="Add"
-                        sx={{ m: 1 }}
-                        startIcon={<AddIcon />}
-                    >
-                        Add
-                    </Button>
+                <Button
+                    variant="contained"
+                    type="submit"
+                    name="update"
+                    value="Update"
+                    sx={{ m: 1 }}
+                    startIcon={<MoveUpIcon />}
+                >
+                    Update
+                </Button>
 
-                    <Button
-                        variant="contained"
-                        type="submit"
-                        name="update"
-                        value="Update"
-                        sx={{ m: 1 }}
-                        startIcon={<MoveUpIcon />}
-                    >
-                        Update
-                    </Button>
+                <Button
+                    variant="contained"
+                    color="error"
+                    type="submit"
+                    name="delete"
+                    value="Delete"
+                    sx={{ m: 1 }}
+                    startIcon={<DeleteIcon />}
+                >
+                    Delete
+                </Button>
 
-                    <Button
-                        variant="contained"
-                        color="error"
-                        type="submit"
-                        name="delete"
-                        value="Delete"
-                        sx={{ m: 1 }}
-                        startIcon={<DeleteIcon />}
-                    >
-                        Delete
-                    </Button>
+                <Button
+                    variant="outlined"
+                    color="warning"
+                    type="submit"
+                    name="reset"
+                    value="Reset"
+                    sx={{ m: 1 }}
+                    startIcon={<CleaningServicesIcon />}
+                >
+                    Reset
+                </Button>
 
-                    <Button
-                        variant="outlined"
-                        color="warning"
-                        type="submit"
-                        name="reset"
-                        value="Reset"
-                        sx={{ m: 1 }}
-                        startIcon={<CleaningServicesIcon />}
-                    >
-                        Reset
-                    </Button>
-
-                    {/*<Button*/}
-                    {/*    variant="outlined"*/}
-                    {/*    color="inherit"*/}
-                    {/*    type="submit"*/}
-                    {/*    name="bulkInsert"*/}
-                    {/*    value="Bulk Insert"*/}
-                    {/*    sx={{ m: 1 }}*/}
-                    {/*    startIcon={<FileUploadIcon />}*/}
-                    {/*>*/}
-                    {/*    Bulk Insert*/}
-                    {/*</Button>*/}
-                </Box >
-                <div class="container">
-                    <ErrorDataGrid />
-                </div>
+                {/*<Button*/}
+                {/*    variant="outlined"*/}
+                {/*    color="inherit"*/}
+                {/*    type="submit"*/}
+                {/*    name="bulkInsert"*/}
+                {/*    value="Bulk Insert"*/}
+                {/*    sx={{ m: 1 }}*/}
+                {/*    startIcon={<FileUploadIcon />}*/}
+                {/*>*/}
+                {/*    Bulk Insert*/}
+                {/*</Button>*/}
+            </Box >
+            <div class="container">
+                <ErrorDataGrid />
+            </div>
         </>
     );
+
+    function ResetState() {
+        dispatch(setId(0));
+        dispatch(setCategory(''));
+        dispatch(setDeviceClassName(''));
+        dispatch(setErrorCode(''));
+        dispatch(setDescription(''));
+        dispatch(setTag(''));
+        dispatch(setRowSelection([]));
+    }
 }
 export default ErrorDataForm;
