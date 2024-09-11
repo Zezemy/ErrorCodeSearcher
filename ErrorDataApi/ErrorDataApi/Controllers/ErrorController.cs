@@ -161,9 +161,18 @@ namespace ErrorDataApi.Controllers
         {
             try
             {
-                if (req.ErrorDataArray.Any(x => AnyFieldsEmpty(x)))
+                foreach (var errorDataFromRequest in req.ErrorDataArray)
                 {
-                    return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                    if (req.ErrorDataArray.Any(x => AnyFieldsEmpty(x)))
+                    {
+                        return ReturnResponseMessage("1", "İşlem başarısız. Alanlar boş olamaz.");
+                    }
+                    var supportedDevices = Enum.GetNames<DeviceClasses>().ToList();
+                    supportedDevices.Add("XFSGeneral");
+                    if (!supportedDevices.Contains(errorDataFromRequest.DeviceClassName))
+                    {
+                        return ReturnResponseMessage("3", $"İşlem başarısız. Desteklenmeyen cihaz tipi: {errorDataFromRequest.DeviceClassName}");
+                    }
                 }
                 _context.ErrorDatas.AddRange(req.ErrorDataArray);
                 _context.SaveChanges();
@@ -171,14 +180,16 @@ namespace ErrorDataApi.Controllers
             }
             catch (DbUpdateException ex)
             {
-                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
-            }
-            catch (Exception e)
-            {
+                if (ex.InnerException != null && ex.InnerException is SqlException)
+                {
+                    if (((SqlException)ex.InnerException).Number == 2601)
+                    {
+                        return ReturnResponseMessage("4", "Var olan kayıt tekrar eklenemez.");
+                    }
+                }
                 return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
             }
         }
-
 
         [HttpPut(Name = "UpdateAsync")]
         public async Task<BaseResponse> UpdateAsync([FromBody] ErrorDataRequest req)
@@ -214,14 +225,13 @@ namespace ErrorDataApi.Controllers
             }
             catch (DbUpdateException ex)
             {
-                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+                return ReturnResponseMessage("4", "Kayıt güncellenirken hata oluştu.");
             }
             catch (Exception e)
             {
-                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+                return ReturnResponseMessage("5", "Güncelleme işlemi başarısız.");
             }
         }
-
 
         [HttpDelete(Name = "DeleteAsync")]
         public async Task<BaseResponse> DeleteAsync(long id)
@@ -243,11 +253,11 @@ namespace ErrorDataApi.Controllers
             }
             catch (DbUpdateException ex)
             {
-                return ReturnResponseMessage("4", "DB'ye kayıt eklenemiyor.");
+                return ReturnResponseMessage("4", "Kayıt silinirken hata oluştu.");
             }
             catch (Exception e)
             {
-                return ReturnResponseMessage("5", "Ekleme işlemi başarısız.");
+                return ReturnResponseMessage("5", "Silme işlemi başarısız.");
             }
         }
 
